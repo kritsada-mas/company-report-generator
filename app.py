@@ -15,8 +15,8 @@ input_url = create_report_form.text_input(label='Company Webpage URL', placehold
                                           help='This can be any webpage that provides basic information about the company (e.g. https://fluxus.io).')
 
 # Expander inside the form
-# with create_report_form.expander("Customize Workflow (Optional)"):
-    # workflow_form = st.form(key='workflow')
+with create_report_form.expander("Customize Workflow (Optional)"):
+    workflow_form = st.form('workflow')
     # get_workflow_button = workflow_form.form_submit_button("Get Workflow")
     # workflow_text = workflow_form.text_area("Workflow", value="", height=200)
     
