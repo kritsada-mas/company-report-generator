@@ -12,17 +12,19 @@ st.write('Harness the power of generative AI to create insightful company report
 # Radio button to choose between creating a new workflow or loading an existing one
 workflow_option = st.radio("Select Workflow Option", ["Create New Workflow", "Load Existing Workflow"])
 
+# Search bar for both options
+input_url = st.text_input(label='Company Webpage URL', placeholder='', value='', help='Enter the company webpage URL.')
+
 if workflow_option == "Create New Workflow":
-    st.subheader("Create a New Workflow")
-    create_report_form = st.form(key='create_report')
-    input_url = create_report_form.text_input(label='Company Webpage URL', placeholder='', value='', disabled=False,
-                                              help='This can be any webpage that provides basic information about the company (e.g. https://fluxus.io).')
-    create_report_submitted = create_report_form.form_submit_button(label='Create a New Report', disabled=False)
-    if create_report_submitted:
-        with st.spinner('creating report...'): create_new_report(create_report_form, input_url)
+    # Create a collapsible expander for the "Create New Workflow" form
+    with st.beta_expander("Create a New Workflow", expanded=True):
+        create_report_form = st.form(key='create_report')
+        create_report_submitted = create_report_form.form_submit_button(label='Create a New Report', disabled=False)
+        if create_report_submitted:
+            with st.spinner('creating report...'): create_new_report(create_report_form, input_url)
 
 elif workflow_option == "Load Existing Workflow":
-    st.subheader("Load an Existing Workflow")
+    # "Load Existing Workflow" form
     get_report_form = st.form(key='get_report')
     report_id = get_report_form.text_input(label='Report ID', placeholder='', value='', disabled=False,
                                            help="All reports have a unique identifier assigned to them. This was provided to you in the response when creating a new report.")
