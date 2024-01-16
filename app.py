@@ -18,7 +18,8 @@ create_report_submitted = create_report_form.form_submit_button(label='Create a 
 # Expander for customizing workflow (optional)
 with st.expander("Customize Workflow (Optional)"):
     workflow_form = st.form(key='workflow')
-    submit_button = workflow_form.form_submit_button(label='Hit me')
+    get_workflow = workflow_form.form_submit_button(label='Hit me')
+    create_workflow = workflow_form.form_submit_button(label='Hit me')
 
 if create_report_submitted:
     with st.spinner('creating report...'):
