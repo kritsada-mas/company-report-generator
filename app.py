@@ -19,7 +19,9 @@ with create_report_form.expander("Customize Workflow (Optional)"):
     workflow_form = st.form(key='workflow')
     get_workflow_button = workflow_form.form_submit_button("Get Workflow")
     workflow_text = workflow_form.text_area("Workflow", value="", height=200)
-    create_workflow_button = workflow_form.form_submit_button("Create Workflow")
+    
+    # Make the label more descriptive
+    create_workflow_button = workflow_form.form_submit_button("Create Custom Workflow")
 
 create_report_submitted = create_report_form.form_submit_button(label='Create a New Report', disabled=False)
 if create_report_submitted:
