@@ -15,8 +15,8 @@ input_url = create_report_form.text_input(label='Company Webpage URL', placehold
                                           help='This can be any webpage that provides basic information about the company (e.g. https://fluxus.io).')
 
 # Expander inside the form
-with create_report_form.expander("Customize Workflow (Optional)"):
-    st.button('Hit me')
+# with create_report_form.expander("Customize Workflow (Optional)"):
+#     st.button('Hit me')
 
 create_report_submitted = create_report_form.form_submit_button(label='Create a New Report', disabled=False)
 if create_report_submitted:
