@@ -16,7 +16,7 @@ input_url = create_report_form.text_input(label='Company Webpage URL', placehold
 
 # expander for customizing workflow (optional)
 with st.expander("Customize Workflow (Optional)"):
-    st.write("Hi")
+    st.write("bye")
     
     
 create_report_submitted = create_report_form.form_submit_button(label='Create a New Report', disabled=False)
