@@ -16,14 +16,10 @@ input_url = create_report_form.text_input(label='Company Webpage URL', placehold
 
 # Expander inside the form
 with create_report_form.expander("Customize Workflow (Optional)"):
-    # Button to get workflow
-    get_workflow_button = create_report_form.form_submit_button("Get Workflow")
-
-    # Text box to display the workflow
-    workflow_text = st.text_area("Workflow", value="", height=200)
-
-    # Button to create workflow
-    create_workflow_button = create_report_form.form_submit_button("Create Workflow")
+    workflow_form = st.form(key='workflow')
+    get_workflow_button = workflow_form.form_submit_button("Get Workflow")
+    workflow_text = workflow_form.text_area("Workflow", value="", height=200)
+    create_workflow_button = workflow_form.form_submit_button("Create Workflow")
 
 create_report_submitted = create_report_form.form_submit_button(label='Create a New Report', disabled=False)
 if create_report_submitted:
