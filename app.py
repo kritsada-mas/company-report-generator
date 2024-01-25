@@ -58,17 +58,16 @@ def create_workflow():
             workflow_checkbox(c2, "Business Health", "simple_bh")
             workflow_checkbox(c3, "Audiences", "simple_au")
             workflow_checkbox(c4, "Competitors", "simple_co")
-            save_t1 = st.button('Save Selection')
+            save_t1 = st.button('Save Selection',key='simple_save')
 
         with t2:
             in_model_provider, in_options = create_workflow_step_options("Introduction", "advance_in")
             bh_model_provider, bh_options = create_workflow_step_options("Business health", "advance_bh")
             au_model_provider, au_options = create_workflow_step_options("Audiences", "advance_au")
             co_model_provider, co_options = create_workflow_step_options("Competitors", "advance_co")
-            save_t2 = st.button('Save Selection')
+            save_t2 = st.button('Save Selection',key='advanced_save')
 
 
-        # Continue for other tabs if needed
 
 if __name__ == "__main__":
     init_page()
