@@ -151,7 +151,7 @@ def create_workflow():
             if save_t2:
                 st.write("Advanced workflow")
                 
-            st.json(in_options)
+            st.json(saved_config)
 
 
 if __name__ == "__main__":
