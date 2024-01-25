@@ -16,7 +16,7 @@ def get_user_input():
         help='This can be any webpage that provides basic information about the company (e.g. https://fluxus.io).'
         )
 
-def workflow_checkbox(column, label, key):
+def workflow_checkbox(label, key):
     return column.checkbox(label=label, key=key)
 
 def workflow_advanced_options(model_type, model_options, use_multiprompt):
@@ -57,11 +57,10 @@ def create_workflow():
         t1, t2, t3 , t4= st.tabs(["Simple", "Advanced", "Fully Customize", "Current Workflow"])
 
         with t1:
-            c1, c2, c3, c4 = st.columns(4)
-            simple_in = workflow_checkbox(c1, "Introduction", "simple_in")
-            simple_bh = workflow_checkbox(c2, "Business Health", "simple_bh")
-            simple_au = workflow_checkbox(c3, "Audiences", "simple_au")
-            simple_co = workflow_checkbox(c4, "Competitors", "simple_co")
+            simple_in = st.checkbox(label="Introduction", key="simple_in")
+            simple_bh = st.checkbox(label="Business Health", key="simple_bh")
+            simple_au = st.checkbox(label="Audiences", key="simple_au")
+            simple_co = st.checkbox(label="Competitors", key="simple_co")
             save_t1 = st.button('Save Selection', key='simple_save')
 
         with t2:
