@@ -106,6 +106,12 @@ def create_workflow():
             simple_au = st.checkbox(label="Audiences", key="simple_au")
             simple_co = st.checkbox(label="Competitors", key="simple_co")
             save_t1 = st.button("Save Selection", key="simple_save")
+            saved_config = {
+                    "Introduction": simple_in,
+                    "Business Health": simple_bh,
+                    "Audiences": simple_au,
+                    "Competitors": simple_co,
+                }
 
         with t2:
             in_options = create_workflow_step_options(
@@ -121,6 +127,12 @@ def create_workflow():
                 "Competitors", "advance_co"
             )
             save_t2 = st.button("Save Selection", key="advanced_save")
+            saved_config = {
+                "Introduction": in_options,
+                "Business Health": bh_options,
+                "Audiences": au_options,
+                "Competitors": co_options,
+            }
 
         with t3:
             st.write("This feature is currently in development")
@@ -136,16 +148,10 @@ def create_workflow():
 
             if save_t1:
                 st.write("Simple workflow")
-                saved_config = {
-                    "Introduction": simple_in,
-                    "Business Health": simple_bh,
-                    "Audiences": simple_au,
-                    "Competitors": simple_co,
-                }
-            st.write(saved_config)
-
             if save_t2:
-                st.json(in_options)
+                st.write("Advanced workflow")
+                
+            st.json(in_options)
 
 
 if __name__ == "__main__":
