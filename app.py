@@ -57,24 +57,32 @@ def create_workflow():
 
         with t1:
             c1, c2, c3, c4 = st.columns(4)
-            workflow_checkbox(c1, "Introduction", "simple_in")
-            workflow_checkbox(c2, "Business Health", "simple_bh")
-            workflow_checkbox(c3, "Audiences", "simple_au")
-            workflow_checkbox(c4, "Competitors", "simple_co")
-            save_t1 = st.button('Save Selection',key='simple_save')
+            simple_in = workflow_checkbox(c1, "Introduction", "simple_in")
+            simple_bh = workflow_checkbox(c2, "Business Health", "simple_bh")
+            simple_au = workflow_checkbox(c3, "Audiences", "simple_au")
+            simple_co = workflow_checkbox(c4, "Competitors", "simple_co")
+            save_t1 = st.button('Save Selection', key='simple_save')
 
         with t2:
             in_model_provider, in_options = create_workflow_step_options("Introduction", "advance_in")
             bh_model_provider, bh_options = create_workflow_step_options("Business health", "advance_bh")
             au_model_provider, au_options = create_workflow_step_options("Audiences", "advance_au")
             co_model_provider, co_options = create_workflow_step_options("Competitors", "advance_co")
-            save_t2 = st.button('Save Selection',key='advanced_save')
+            save_t2 = st.button('Save Selection', key='advanced_save')
             
         with t3:
             st.write("This feature is currently in development")
             # save_t3 = st.button('Save Selection',key='custom_save')
-
-
+         
+        with t4:
+            st.write("Current Workflow Configuration:")
+            saved_config = {
+                "Introduction": simple_in,
+                "Business Health": simple_bh,
+                "Audiences": simple_au,
+                "Competitors": simple_co
+            }
+            st.write(saved_config)
 
 if __name__ == "__main__":
     init_page()
