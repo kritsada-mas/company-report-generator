@@ -65,7 +65,7 @@ def create_workflow():
 
         with t2:
             in_model_provider, in_options = create_workflow_step_options("Introduction", "advance_in")
-            bh_model_provider, bh_options = create_workflow_step_options("Business health", "advance_bh")
+            bh_model_provider, bh_options = create_workflow_step_options("Business Health", "advance_bh")
             au_model_provider, au_options = create_workflow_step_options("Audiences", "advance_au")
             co_model_provider, co_options = create_workflow_step_options("Competitors", "advance_co")
             save_t2 = st.button('Save Selection', key='advanced_save')
