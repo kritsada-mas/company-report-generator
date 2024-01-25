@@ -20,22 +20,36 @@ with st.expander("Customize Workflow (Optional)"):
         c1, c2, c3, c4 = st.columns(4)
         
         with c1:
-            st.checkbox(label="Introduction", key="simple_introduction")
+            st.checkbox(label="Introduction", key="simple_in")
         with c2:
-            st.checkbox("Business Health")
+            st.checkbox(label="Business Health", key="simple_bh")
         with c3:
-            st.checkbox("Audiences")
+            st.checkbox(label="Audiences", key="simple_au")
         with c4:
-            st.checkbox("Competitors")
+            st.checkbox(label="Competitors", key="simple_co")
             
         save_t1 = st.button('Save Selection')
 
     with t2:
-        check_intoduction = st.checkbox(label="Introduction", key="advance_introduction")
+        check_intoduction = st.checkbox(label="Introduction", key="advance_in")
         if check_intoduction:
             model_provider = st.selectbox("Model Provider", ["Bedrock", "OpenAI"])
             if model_provider == "Bedrock":
                 model =  st.selectbox("Model", ["anthropic.claude-v1", "anthropic.claude-v2","anthropic.claude-instant-v1"])
+                multiprompt = st.toggle("Granular-prompt")
+                if not multiprompt:
+                    prompt = st.text_input("Prompt")
+                else:
+                    p_human = st.text_input("p_human")
+                    p_task_context = st.text_input("p_task_context")
+                    p_tone_context = st.text_input("p_tone_context")
+                    p_data = st.text_input("p_data")
+                    p_task_description = st.text_input("p_task_description")
+                    p_example = st.text_input("p_example")
+                    p_conversation_history = st.text_input("p_conversation_history")
+                    p_thought_process = st.text_input("p_thought_process")
+                    p_formatting = st.text_input("p_formatting")
+                    p_assistant = st.text_input("p_assistant")
 
         
 
