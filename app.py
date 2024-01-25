@@ -33,43 +33,42 @@ with st.expander("Customize Workflow (Optional)"):
     with t2:
         check_in = st.checkbox(label="Introduction", key="advance_in")
         if check_in:
-            model_provider = st.selectbox("Model Provider", ["Bedrock", "OpenAI"])
-            if model_provider == "Bedrock":
-                model =  st.selectbox("Model", ["anthropic.claude-v1", "anthropic.claude-v2","anthropic.claude-instant-v1"])
-                multiprompt = st.toggle("Granular-prompt")
-                if not multiprompt:
-                    prompt = st.text_input("Prompt")
+            in_model_provider = st.selectbox("Model Provider", ["Bedrock", "OpenAI"])
+            if in_model_provider == "Bedrock":
+                in_model =  st.selectbox("Model", ["anthropic.claude-v1", "anthropic.claude-v2","anthropic.claude-instant-v1"])
+                in_multiprompt = st.toggle("Granular-prompt")
+                if not in_multiprompt:
+                    in_prompt = st.text_input("Prompt")
                 else:
-                    p_human = st.text_input("p_human")
-                    p_task_context = st.text_input("p_task_context")
-                    p_tone_context = st.text_input("p_tone_context")
-                    p_data = st.text_input("p_data")
-                    p_task_description = st.text_input("p_task_description")
-                    p_example = st.text_input("p_example")
-                    p_conversation_history = st.text_input("p_conversation_history")
-                    p_thought_process = st.text_input("p_thought_process")
-                    p_formatting = st.text_input("p_formatting")
-                    p_assistant = st.text_input("p_assistant")
+                    in_p_human = st.text_input("p_human")
+                    in_p_task_context = st.text_input("p_task_context")
+                    in_p_tone_context = st.text_input("p_tone_context")
+                    in_p_data = st.text_input("p_data")
+                    in_p_task_description = st.text_input("p_task_description")
+                    in_p_example = st.text_input("p_example")
+                    in_p_conversation_history = st.text_input("p_conversation_history")
+                    in_p_thought_process = st.text_input("p_thought_process")
+                    in_p_formatting = st.text_input("p_formatting")
+                    in_p_assistant = st.text_input("p_assistant")
         check_bh = st.checkbox(label="Business health", key="advance_bh")
         if check_bh:
-            pass
-            model_provider = st.selectbox("Model Provider", ["Bedrock", "OpenAI"])
-            # if model_provider == "Bedrock":
-            #     model =  st.selectbox("Model", ["anthropic.claude-v1", "anthropic.claude-v2","anthropic.claude-instant-v1"])
-            #     multiprompt = st.toggle("Granular-prompt")
-            #     if not multiprompt:
-            #         prompt = st.text_input("Prompt")
-            #     else:
-            #         p_human = st.text_input("p_human")
-            #         p_task_context = st.text_input("p_task_context")
-            #         p_tone_context = st.text_input("p_tone_context")
-            #         p_data = st.text_input("p_data")
-            #         p_task_description = st.text_input("p_task_description")
-            #         p_example = st.text_input("p_example")
-            #         p_conversation_history = st.text_input("p_conversation_history")
-            #         p_thought_process = st.text_input("p_thought_process")
-            #         p_formatting = st.text_input("p_formatting")
-            #         p_assistant = st.text_input("p_assistant")
+            bh_model_provider = st.selectbox("Model Provider", ["Bedrock", "OpenAI"])
+            if bh_model_provider == "Bedrock":
+                bh_model =  st.selectbox("Model", ["anthropic.claude-v1", "anthropic.claude-v2","anthropic.claude-instant-v1"])
+                bh_multiprompt = st.toggle("Granular-prompt")
+                if not bh_multiprompt:
+                    bh_prompt = st.text_input("Prompt")
+                else:
+                    bh_p_human = st.text_input("p_human")
+                    bh_p_task_context = st.text_input("p_task_context")
+                    bh_p_tone_context = st.text_input("p_tone_context")
+                    bh_p_data = st.text_input("p_data")
+                    bh_p_task_description = st.text_input("p_task_description")
+                    bh_p_example = st.text_input("p_example")
+                    bh_p_conversation_history = st.text_input("p_conversation_history")
+                    bh_p_thought_process = st.text_input("p_thought_process")
+                    bh_p_formatting = st.text_input("p_formatting")
+                    bh_p_assistant = st.text_input("p_assistant")
 
         
 
