@@ -8,7 +8,7 @@ def init_page():
     st.write('Harness the power of generative AI to create insightful company reports')
     
 def get_user_input():
-    st.text_input(
+    return st.text_input(
         label='Company Webpage URL',
         placeholder='',
         value='',
@@ -54,7 +54,7 @@ def create_workflow_step_options(label, key):
 def create_workflow():
     saved_config = {}  # Initialize saved configuration dictionary
     with st.expander("Customize Workflow (Optional)"):
-        t1, t2, t3 , t4= st.tabs(["Simple", "Advanced", "Fully Customize", "Current Workflow"])
+        t1, t2, t3= st.tabs(["Simple", "Advanced", "Fully Customize"])
 
         with t1:
             simple_in = st.checkbox(label="Introduction", key="simple_in")
@@ -73,8 +73,11 @@ def create_workflow():
         with t3:
             st.write("This feature is currently in development")
             # save_t3 = st.button('Save Selection',key='custom_save')
+            
+        tt1, tt2, = st.tabs(["Current Workflow", "temp"])
+
          
-        with t4:
+        with tt1:
             st.write("Current Workflow Configuration:")
 
             if save_t1:
@@ -90,5 +93,5 @@ def create_workflow():
 
 if __name__ == "__main__":
     init_page()
-    get_user_input()
-    create_workflow()
+    user_input = get_user_input()
+    workflow = create_workflow()
