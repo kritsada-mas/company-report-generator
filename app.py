@@ -33,7 +33,9 @@ with st.expander("Customize Workflow (Optional)"):
     with t2:
         check_intoduction = st.checkbox(label="Introduction", key="advance_introduction")
         if check_intoduction:
-            st.selectbox("Model Provide", ["Bedrock", "OpenAI"])
+            model_provider = st.selectbox("Model Provider", ["Bedrock", "OpenAI"])
+            if model_provider == "Bedrock":
+                model =  st.selectbox("Model", ["anthropic.claude-v1", "anthropic.claude-v2","anthropic.claude-instant-v1"])
 
         
 
