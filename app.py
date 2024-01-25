@@ -77,15 +77,17 @@ def create_workflow():
          
         with t4:
             st.write("Current Workflow Configuration:")
-            st.write(saved_config)  # Display the saved configuration
 
-        if save_t1:
-            saved_config = {
-                "Introduction": simple_in,
-                "Business Health": simple_bh,
-                "Audiences": simple_au,
-                "Competitors": simple_co
-            }
+            if save_t1:
+                saved_config = {
+                    "Introduction": simple_in,
+                    "Business Health": simple_bh,
+                    "Audiences": simple_au,
+                    "Competitors": simple_co
+                }
+                
+            st.write(saved_config)  # Display the saved configuration
+            
 
 if __name__ == "__main__":
     init_page()
