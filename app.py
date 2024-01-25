@@ -15,8 +15,7 @@ st.text_input(label='Company Webpage URL',
               help='This can be any webpage that provides basic information about the company (e.g. https://fluxus.io).')
 
 with st.expander("Customize Workflow (Optional)"):
-    workflow_form = st.form(key='workflow')
-    t1, t2 = workflow_form.tabs(["Simple", "Advanced"])
+    t1, t2 = st.tabs(["Simple", "Advanced"])
     with t1:
         c1, c2, c3, c4 = st.columns(4)
         
@@ -30,6 +29,8 @@ with st.expander("Customize Workflow (Optional)"):
             st.checkbox("Competitors")
 
     with t2:
+        workflow_form = st.form(key='workflow')
+        
         get_workflow = workflow_form.form_submit_button(label='Create Workflows')
 
 
