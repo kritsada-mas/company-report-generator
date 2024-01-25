@@ -18,11 +18,16 @@ with st.expander("Customize Workflow (Optional)"):
     workflow_form = st.form(key='workflow')
     t1, t2 = workflow_form.tabs(["Simple", "Advanced"])
     with t1:
-        c1, c2 = st.columns(2)
+        c1, c2, c3, c4 = st.columns(4)
+        
         with c1:
             st.checkbox("Introduction")
         with c2:
             st.checkbox("Business Health")
+        with c3:
+            st.checkbox("Audiences")
+        with c4:
+            st.checkbox("Competitors")
 
 
     
