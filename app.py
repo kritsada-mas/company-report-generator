@@ -19,25 +19,32 @@ def get_user_input():
 def workflow_checkbox(column, label, key):
     return column.checkbox(label=label, key=key)
 
-def workflow_advanced_options(model_type, model_options, use_multiprompt):
-    selected_model = st.selectbox("Model", model_options)
-    if use_multiprompt:
-        c1, c2 = st.columns(2)
-        with c1:
-            p_human = st.text_input("p_human")
-            p_task_context = st.text_input("p_task_context")
-            p_tone_context = st.text_input("p_tone_context")
-            p_data = st.text_input("p_data")
-            p_task_description = st.text_input("p_task_description")
-        with c2:
-            p_example = st.text_input("p_example")
-            p_conversation_history = st.text_input("p_conversation_history")
-            p_thought_process = st.text_input("p_thought_process")
-            p_formatting = st.text_input("p_formatting")
-            p_assistant = st.text_input("p_assistant")
-    else:
-        prompt = st.text_input("Prompt")
-        return selected_model, prompt
+# def workflow_advanced_options(model_type, model_options, use_multiprompt):
+#     selected_model = st.selectbox("Model", model_options)
+#     if use_multiprompt:
+#         c1, c2 = st.columns(2)
+#         with c1:
+#             p_human = st.text_input("p_human")
+#             p_task_context = st.text_input("p_task_context")
+#             p_tone_context = st.text_input("p_tone_context")
+#             p_data = st.text_input("p_data")
+#             p_task_description = st.text_input("p_task_description")
+#         with c2:
+#             p_example = st.text_input("p_example")
+#             p_conversation_history = st.text_input("p_conversation_history")
+#             p_thought_process = st.text_input("p_thought_process")
+#             p_formatting = st.text_input("p_formatting")
+#             p_assistant = st.text_input("p_assistant")
+#     else:
+#         prompt = st.text_input("Prompt")
+#         return selected_model, prompt
+
+def workflow_advanced_options(column, label, key):
+    column = column.checkbox(label=label, key=key)
+    if column:
+        with st.expander(label=label):
+            pass
+    
 
 def create_workflow_step_options(label, key):
     check = st.checkbox(label=label, key=key)
@@ -68,10 +75,10 @@ def create_workflow():
 
         with t2:
             c1, c2, c3, c4 = st.columns(4)
-            advanced_in = workflow_checkbox(c1, "Introduction", "advanced_in")
-            advanced_bh = workflow_checkbox(c2, "Business Health", "advanced_bh")
-            advanced_au = workflow_checkbox(c3, "Audiences", "advanced_au")
-            advanced_co = workflow_checkbox(c4, "Competitors", "advanced_co")
+            advanced_in = workflow_advanced_options(c1, "Introduction", "advanced_in")
+            advanced_bh = workflow_advanced_options(c2, "Business Health", "advanced_bh")
+            advanced_au = workflow_advanced_options(c3, "Audiences", "advanced_au")
+            advanced_co = workflow_advanced_options(c4, "Competitors", "advanced_co")
             save_t2 = st.button('Save Selection', key='advanced_save')
             
         with t3:
