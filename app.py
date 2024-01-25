@@ -1,5 +1,21 @@
 import streamlit as st
 
+def init_page():
+    st.set_page_config(page_title='AI Company Reports')
+    hide_streamlit_style = "<style> footer { visibility: hidden; } </style>"
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+    st.subheader('Company Report Generator', divider='rainbow')
+    st.write('Harness the power of generative AI to create insightful company reports')
+    
+def get_user_input():
+    st.text_input(
+        label='Company Webpage URL',
+        placeholder='',
+        value='',
+        disabled=False,
+        help='This can be any webpage that provides basic information about the company (e.g. https://fluxus.io).'
+        )
+
 def workflow_checkbox(column, label, key):
     return column.checkbox(label=label, key=key)
 
@@ -33,18 +49,6 @@ def create_workflow_step_options(label, key):
     return None, None
 
 def create_workflow():
-    st.set_page_config(page_title='AI Company Reports')
-    hide_streamlit_style = "<style> footer { visibility: hidden; } </style>"
-    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-
-    st.subheader('Company Report Generator', divider='rainbow')
-    st.write('Harness the power of generative AI to create insightful company reports')
-    st.text_input(label='Company Webpage URL',
-                  placeholder='',
-                  value='',
-                  disabled=False,
-                  help='This can be any webpage that provides basic information about the company (e.g. https://fluxus.io).')
-
     with st.expander("Customize Workflow (Optional)"):
         t1, t2, t3 = st.tabs(["Simple", "Advanced", "Fully Customize"])
 
@@ -59,8 +63,14 @@ def create_workflow():
         with t2:
             in_model_provider, in_options = create_workflow_step_options("Introduction", "advance_in")
             bh_model_provider, bh_options = create_workflow_step_options("Business health", "advance_bh")
+            au_model_provider, au_options = create_workflow_step_options("Audiences", "advance_au")
+            co_model_provider, co_options = create_workflow_step_options("Competitors", "advance_co")
+            save_t2 = st.button('Save Selection')
+
 
         # Continue for other tabs if needed
 
 if __name__ == "__main__":
+    init_page()
+    get_user_input()
     create_workflow()
