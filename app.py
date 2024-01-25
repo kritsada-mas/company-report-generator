@@ -17,7 +17,6 @@ st.text_input(label='Company Webpage URL',
 with st.expander("Customize Workflow (Optional)"):
     workflow_form = st.form(key='workflow')
     get_workflow = workflow_form.form_submit_button(label='Hit me')
-    create_workflow = workflow_form.form_submit_button(label='Hit me')
 
 
 
