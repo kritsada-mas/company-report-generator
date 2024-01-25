@@ -31,7 +31,7 @@ with st.expander("Customize Workflow (Optional)"):
         save_t1 = st.button('Save Selection')
 
     with t2:
-        check_intoduction = st.checkbox("Introduction")
+        check_intoduction = st.checkbox("Introduction.")
         if check_intoduction:
             st.multiselect("Model Provide", ["Bedrock", "OpenAI"])
 
