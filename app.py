@@ -1,4 +1,5 @@
 import streamlit as st
+import json
 
 
 def init_page():
@@ -146,7 +147,7 @@ def create_workflow():
             st.write(saved_config)
 
             if save_t2:
-                st.write(in_options)
+                st.json(in_options)
 
 
 if __name__ == "__main__":
