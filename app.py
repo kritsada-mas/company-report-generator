@@ -22,16 +22,19 @@ def workflow_checkbox(column, label, key):
 def workflow_advanced_options(model_type, model_options, use_multiprompt):
     selected_model = st.selectbox("Model", model_options)
     if use_multiprompt:
-        p_human = st.text_input("p_human")
-        p_task_context = st.text_input("p_task_context")
-        p_tone_context = st.text_input("p_tone_context")
-        p_data = st.text_input("p_data")
-        p_task_description = st.text_input("p_task_description")
-        p_example = st.text_input("p_example")
-        p_conversation_history = st.text_input("p_conversation_history")
-        p_thought_process = st.text_input("p_thought_process")
-        p_formatting = st.text_input("p_formatting")
-        p_assistant = st.text_input("p_assistant")
+        c1, c2 = st.columns(2)
+        with c1:
+            p_human = st.text_input("p_human")
+            p_task_context = st.text_input("p_task_context")
+            p_tone_context = st.text_input("p_tone_context")
+            p_data = st.text_input("p_data")
+            p_task_description = st.text_input("p_task_description")
+        with c2:
+            p_example = st.text_input("p_example")
+            p_conversation_history = st.text_input("p_conversation_history")
+            p_thought_process = st.text_input("p_thought_process")
+            p_formatting = st.text_input("p_formatting")
+            p_assistant = st.text_input("p_assistant")
     else:
         prompt = st.text_input("Prompt")
         return selected_model, prompt
