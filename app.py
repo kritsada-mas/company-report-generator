@@ -79,14 +79,13 @@ def create_workflow():
             st.write("Current Workflow Configuration:")
             st.write(saved_config)  # Display the saved configuration
 
-    # Update saved configuration only if the "Save Selection" button for the Simple tab is pressed
-    if save_t1:
-        saved_config = {
-            "Introduction": simple_in,
-            "Business Health": simple_bh,
-            "Audiences": simple_au,
-            "Competitors": simple_co
-        }
+        if save_t1:
+            saved_config = {
+                "Introduction": simple_in,
+                "Business Health": simple_bh,
+                "Audiences": simple_au,
+                "Competitors": simple_co
+            }
 
 if __name__ == "__main__":
     init_page()
