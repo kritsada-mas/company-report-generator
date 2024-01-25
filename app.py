@@ -14,6 +14,13 @@ st.text_input(label='Company Webpage URL',
               disabled=False,
               help='This can be any webpage that provides basic information about the company (e.g. https://fluxus.io).')
 
+with st.expander("Customize Workflow (Optional)"):
+    workflow_form = st.form(key='workflow')
+    get_workflow = workflow_form.form_submit_button(label='Hit me')
+    create_workflow = workflow_form.form_submit_button(label='Hit me')
+
+
+
 # # Form to create a new report
 # create_report_form = st.form(key='create_report')
 # input_url = create_report_form.text_input(label='Company Webpage URL', placeholder='', value='', disabled=False,
