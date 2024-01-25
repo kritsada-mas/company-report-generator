@@ -69,9 +69,8 @@ def create_workflow_step_options(label, key):
                     p_assistant = st.text_input("p_assistant")
                 return {
                     "model_provider": model_provider,
-                    "model_options": model_options,
+                    "model": selected_model,
                     "use_multiprompt": use_multiprompt,
-                    "selected_model": selected_model,
                     "prompt": {
                         "p_human": p_human,
                         "p_task_context": p_task_context,
@@ -89,9 +88,8 @@ def create_workflow_step_options(label, key):
                 prompt = st.text_input("Prompt")
                 return {
                     "model_provider": model_provider,
-                    "model_options": model_options,
+                    "model": selected_model,
                     "use_multiprompt": use_multiprompt,
-                    "selected_model": selected_model,
                     "prompt": prompt,
                 }
     return None, None
