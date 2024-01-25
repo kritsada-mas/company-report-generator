@@ -19,53 +19,40 @@ def get_user_input():
 def workflow_checkbox(column, label, key):
     return column.checkbox(label=label, key=key)
 
-def workflow_advanced_options(label, key):
-    is_checked = st.checkbox(label=label, key=key)
-    if is_checked:
+def workflow_advanced_options(model_type, model_options, use_multiprompt):
+    selected_model = st.selectbox("Model", model_options)
+    if use_multiprompt:
+        c1, c2 = st.columns(2)
+        with c1:
+            p_human = st.text_input("p_human")
+            p_task_context = st.text_input("p_task_context")
+            p_tone_context = st.text_input("p_tone_context")
+            p_data = st.text_input("p_data")
+            p_task_description = st.text_input("p_task_description")
+        with c2:
+            p_example = st.text_input("p_example")
+            p_conversation_history = st.text_input("p_conversation_history")
+            p_thought_process = st.text_input("p_thought_process")
+            p_formatting = st.text_input("p_formatting")
+            p_assistant = st.text_input("p_assistant")
+    else:
+        prompt = st.text_input("Prompt")
+        return selected_model, prompt
+
+def create_workflow_step_options(label, key):
+    check = st.checkbox(label=label, key=key)
+    if check:
         model_provider = st.selectbox("Model Provider", ["Bedrock", "OpenAI"])
         if model_provider == "Bedrock":
             model_options = ["anthropic.claude-v1", "anthropic.claude-v2", "anthropic.claude-instant-v1"]
-            selected_model = st.selectbox("Model", model_options)
             use_multiprompt = st.toggle("Granular-prompt")
-            if use_multiprompt:
-                c1, c2 = st.columns(2)
-                with c1:
-                    p_human = st.text_input("p_human")
-                    p_task_context = st.text_input("p_task_context")
-                    p_tone_context = st.text_input("p_tone_context")
-                    p_data = st.text_input("p_data")
-                    p_task_description = st.text_input("p_task_description")
-                with c2:
-                    p_example = st.text_input("p_example")
-                    p_conversation_history = st.text_input("p_conversation_history")
-                    p_thought_process = st.text_input("p_thought_process")
-                    p_formatting = st.text_input("p_formatting")
-                    p_assistant = st.text_input("p_assistant")
-            else:
-                prompt = st.text_input("Prompt")
-            return {
-                "is_checked": is_checked,
-                "model_provider": model_provider,
-                "selected_model": selected_model,
-                "use_multiprompt": use_multiprompt,
-                "p_human": p_human,
-                "p_task_context": p_task_context,
-                "p_tone_context": p_tone_context,
-                "p_data": p_data,
-                "p_task_description": p_task_description,
-                "p_example": p_example,
-                "p_conversation_history": p_conversation_history,
-                "p_thought_process": p_thought_process,
-                "p_formatting": p_formatting,
-                "p_assistant": p_assistant
-            }
-    return {"is_checked": is_checked}
-
+            return model_provider, workflow_advanced_options(model_provider, model_options, use_multiprompt)
+        else:
+            return model_provider, None
+    return None, None
 
 def create_workflow():
-    saved_simple_config = {}  # Initialize saved configuration dictionary for simple tab
-    saved_advanced_config = {}  # Initialize saved configuration dictionary for advanced tab
-    
+    saved_config = {}  # Initialize saved configuration dictionary
     with st.expander("Customize Workflow (Optional)"):
         t1, t2, t3 , t4= st.tabs(["Simple", "Advanced", "Fully Customize", "Current Workflow"])
 
@@ -78,11 +65,10 @@ def create_workflow():
             save_t1 = st.button('Save Selection', key='simple_save')
 
         with t2:
-            c1, c2, c3, c4 = st.columns(4)
-            advanced_in = workflow_advanced_options(c1, "Introduction", "advanced_in")
-            advanced_bh = workflow_advanced_options(c2, "Business Health", "advanced_bh")
-            advanced_au = workflow_advanced_options(c3, "Audiences", "advanced_au")
-            advanced_co = workflow_advanced_options(c4, "Competitors", "advanced_co")
+            in_model_provider, in_options = create_workflow_step_options("Introduction", "advance_in")
+            bh_model_provider, bh_options = create_workflow_step_options("Business health", "advance_bh")
+            au_model_provider, au_options = create_workflow_step_options("Audiences", "advance_au")
+            co_model_provider, co_options = create_workflow_step_options("Competitors", "advance_co")
             save_t2 = st.button('Save Selection', key='advanced_save')
             
         with t3:
@@ -91,26 +77,16 @@ def create_workflow():
          
         with t4:
             st.write("Current Workflow Configuration:")
+
             if save_t1:
-                saved_simple_config = {
+                saved_config = {
                     "Introduction": simple_in,
                     "Business Health": simple_bh,
                     "Audiences": simple_au,
                     "Competitors": simple_co
                 }
-            if save_t2:
-                saved_advanced_config = {
-                    "Introduction": advanced_in,
-                    "Business Health": advanced_bh,
-                    "Audiences": advanced_au,
-                    "Competitors": advanced_co
-                }
-            
-            st.write("Simple Tab Configuration:")
-            st.write(saved_simple_config)
-            
-            st.write("Advanced Tab Configuration:")
-            st.write(saved_advanced_config)
+            st.write(saved_config)  # Display the saved configuration
+                
 
 if __name__ == "__main__":
     init_page()
