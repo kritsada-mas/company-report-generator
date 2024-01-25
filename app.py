@@ -68,31 +68,31 @@ def create_workflow_step_options(label, key):
                     p_formatting = st.text_input("p_formatting")
                     p_assistant = st.text_input("p_assistant")
                 return {
-                    model_provider: model_provider,
-                    model_options: model_options,
-                    use_multiprompt: use_multiprompt,
-                    selected_model: selected_model,
-                    prompt: {
-                        p_human: p_human,
-                        p_task_context: p_task_context,
-                        p_tone_context: p_tone_context,
-                        p_data: p_data,
-                        p_task_description: p_task_description,
-                        p_example: p_example,
-                        p_conversation_history: p_conversation_history,
-                        p_thought_process: p_thought_process,
-                        p_formatting: p_formatting,
-                        p_assistant: p_assistant,
+                    "model_provider": model_provider,
+                    "model_options": model_options,
+                    "use_multiprompt": use_multiprompt,
+                    "selected_model": selected_model,
+                    "prompt": {
+                        "p_human": p_human,
+                        "p_task_context": p_task_context,
+                        "p_tone_context": p_tone_context,
+                        "p_data": p_data,
+                        "p_task_description": p_task_description,
+                        "p_example": p_example,
+                        "p_conversation_history": p_conversation_history,
+                        "p_thought_process": p_thought_process,
+                        "p_formatting": p_formatting,
+                        "p_assistant": p_assistant,
                     },
                 }
             else:
                 prompt = st.text_input("Prompt")
                 return {
-                    model_provider: model_provider,
-                    model_options: model_options,
-                    use_multiprompt: use_multiprompt,
-                    selected_model: selected_model,
-                    prompt: prompt,
+                    "model_provider": model_provider,
+                    "model_options": model_options,
+                    "use_multiprompt": use_multiprompt,
+                    "selected_model": selected_model,
+                    "prompt": prompt,
                 }
     return None, None
 
