@@ -41,7 +41,7 @@ def workflow_checkbox(column, label, key):
 
 def workflow_advanced_options(column, label, key):
     column = column.checkbox(label=label, key=key)
-    if column:
+    with column:
         model_provider = st.selectbox("Model Provider", ["Bedrock", "OpenAI"])
         if model_provider == "Bedrock":
             model_options = ["anthropic.claude-v1", "anthropic.claude-v2", "anthropic.claude-instant-v1"]
