@@ -50,7 +50,7 @@ with st.expander("Customize Workflow (Optional)"):
                     p_thought_process = st.text_input("p_thought_process")
                     p_formatting = st.text_input("p_formatting")
                     p_assistant = st.text_input("p_assistant")
-        check_bh = st.checkbox(label="Introduction", key="advance_in")
+        check_bh = st.checkbox(label="Business health", key="advance_bh")
         if check_bh:
             model_provider = st.selectbox("Model Provider", ["Bedrock", "OpenAI"])
             if model_provider == "Bedrock":
