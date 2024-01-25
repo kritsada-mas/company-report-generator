@@ -52,7 +52,9 @@ def create_workflow_step_options(label, key):
     return None, None
 
 def create_workflow():
-    saved_config = {}  # Initialize saved configuration dictionary
+    saved_simple_config = {}  # Initialize saved configuration dictionary for simple tab
+    saved_advanced_config = {}  # Initialize saved configuration dictionary for advanced tab
+    
     with st.expander("Customize Workflow (Optional)"):
         t1, t2, t3 , t4= st.tabs(["Simple", "Advanced", "Fully Customize", "Current Workflow"])
 
@@ -65,10 +67,11 @@ def create_workflow():
             save_t1 = st.button('Save Selection', key='simple_save')
 
         with t2:
-            in_model_provider, in_options = create_workflow_step_options("Introduction", "advance_in")
-            bh_model_provider, bh_options = create_workflow_step_options("Business health", "advance_bh")
-            au_model_provider, au_options = create_workflow_step_options("Audiences", "advance_au")
-            co_model_provider, co_options = create_workflow_step_options("Competitors", "advance_co")
+            c1, c2, c3, c4 = st.columns(4)
+            advanced_in = workflow_checkbox(c1, "Introduction", "advanced_in")
+            advanced_bh = workflow_checkbox(c2, "Business Health", "advanced_bh")
+            advanced_au = workflow_checkbox(c3, "Audiences", "advanced_au")
+            advanced_co = workflow_checkbox(c4, "Competitors", "advanced_co")
             save_t2 = st.button('Save Selection', key='advanced_save')
             
         with t3:
@@ -77,17 +80,26 @@ def create_workflow():
          
         with t4:
             st.write("Current Workflow Configuration:")
-
             if save_t1:
-                saved_config = {
+                saved_simple_config = {
                     "Introduction": simple_in,
                     "Business Health": simple_bh,
                     "Audiences": simple_au,
                     "Competitors": simple_co
                 }
-                
-            st.write(saved_config)  # Display the saved configuration
+            if save_t2:
+                saved_advanced_config = {
+                    "Introduction": advanced_in,
+                    "Business Health": advanced_bh,
+                    "Audiences": advanced_au,
+                    "Competitors": advanced_co
+                }
             
+            st.write("Simple Tab Configuration:")
+            st.write(saved_simple_config)
+            
+            st.write("Advanced Tab Configuration:")
+            st.write(saved_advanced_config)
 
 if __name__ == "__main__":
     init_page()
