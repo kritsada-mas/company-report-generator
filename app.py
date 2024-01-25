@@ -29,11 +29,8 @@ with st.expander("Customize Workflow (Optional)"):
         with c4:
             st.checkbox("Competitors")
 
-
-    
-    
-    
-    get_workflow = workflow_form.form_submit_button(label='Create Workflow')
+    with t2:
+        get_workflow = workflow_form.form_submit_button(label='Create Workflow')
 
 
 
