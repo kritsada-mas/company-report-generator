@@ -52,6 +52,7 @@ def create_workflow_step_options(label, key):
     return None, None
 
 def create_workflow():
+    saved_config = {}  # Initialize saved configuration dictionary
     with st.expander("Customize Workflow (Optional)"):
         t1, t2, t3 , t4= st.tabs(["Simple", "Advanced", "Fully Customize", "Current Workflow"])
 
@@ -76,13 +77,16 @@ def create_workflow():
          
         with t4:
             st.write("Current Workflow Configuration:")
-            saved_config = {
-                "Introduction": simple_in,
-                "Business Health": simple_bh,
-                "Audiences": simple_au,
-                "Competitors": simple_co
-            }
-            st.write(saved_config)
+            st.write(saved_config)  # Display the saved configuration
+
+    # Update saved configuration only if the "Save Selection" button for the Simple tab is pressed
+    if save_t1:
+        saved_config = {
+            "Introduction": simple_in,
+            "Business Health": simple_bh,
+            "Audiences": simple_au,
+            "Competitors": simple_co
+        }
 
 if __name__ == "__main__":
     init_page()
