@@ -52,9 +52,11 @@ def create_workflow_step_options(label, key):
     return None, None
 
 def create_workflow():
-    saved_config = {}  # Initialize saved configuration dictionary
+    saved_config_simple = {}  # Initialize saved configuration dictionary for the simple tab
+    saved_config_advanced = {}  # Initialize saved configuration dictionary for the advanced tab
+    
     with st.expander("Customize Workflow (Optional)"):
-        t1, t2, t3= st.tabs(["Simple", "Advanced", "Fully Customize"])
+        t1, t2, t3 = st.tabs(["Simple", "Advanced", "Fully Customize"])
 
         with t1:
             simple_in = st.checkbox(label="Introduction", key="simple_in")
@@ -70,25 +72,31 @@ def create_workflow():
             co_model_provider, co_options = create_workflow_step_options("Competitors", "advance_co")
             save_t2 = st.button('Save Selection', key='advanced_save')
             
+            if save_t2:
+                saved_config_advanced = {
+                    "Introduction": in_options,
+                    "Business Health": bh_options,
+                    "Audiences": au_options,
+                    "Competitors": co_options
+                }
+
         with t3:
             st.write("This feature is currently in development")
             # save_t3 = st.button('Save Selection',key='custom_save')
             
-        tt1, tt2, = st.tabs(["Current Workflow", "temp"])
-
-         
+        tt1, tt2 = st.columns(2)
         with tt1:
-            st.write("Current Workflow Configuration:")
+            st.write("Current Workflow Configuration for Simple Tab:")
+            st.write(saved_config_simple)
+            
+        with tt2:
+            st.write("Current Workflow Configuration for Advanced Tab:")
+            st.write(saved_config_advanced)
 
-            if save_t1:
-                st.write("Simple workflow")
-                saved_config = {
-                    "Introduction": simple_in,
-                    "Business Health": simple_bh,
-                    "Audiences": simple_au,
-                    "Competitors": simple_co
-                }
-            st.write(saved_config)
+if __name__ == "__main__":
+    init_page()
+    user_input = get_user_input()
+    workflow = create_workflow()
                 
 
 if __name__ == "__main__":
