@@ -18,7 +18,8 @@ with st.expander("Customize Workflow (Optional)"):
     workflow_form = st.form(key='workflow')
     t1, t2 = workflow_form.tabs(["Simple", "Advanced"])
     with t1:
-        st.multiselect("Buy", ["milk", "apples", "potatoes"])
+        st.checkbox("I agree")
+
 
     
     
