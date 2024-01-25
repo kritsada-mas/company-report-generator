@@ -53,7 +53,7 @@ with st.expander("Customize Workflow (Optional)"):
         check_bh = st.checkbox(label="Business health", key="advance_bh")
         if check_bh:
             pass
-            # model_provider = st.selectbox("Model Provider", ["Bedrock", "OpenAI"])
+            model_provider = st.selectbox("Model Provider", ["Bedrock", "OpenAI"])
             # if model_provider == "Bedrock":
             #     model =  st.selectbox("Model", ["anthropic.claude-v1", "anthropic.claude-v2","anthropic.claude-instant-v1"])
             #     multiprompt = st.toggle("Granular-prompt")
