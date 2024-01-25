@@ -20,7 +20,7 @@ with st.expander("Customize Workflow (Optional)"):
         c1, c2, c3, c4 = st.columns(4)
         
         with c1:
-            st.checkbox("Introduction")
+            st.checkbox(label="Introduction", key="simple_introduction")
         with c2:
             st.checkbox("Business Health")
         with c3:
@@ -31,9 +31,9 @@ with st.expander("Customize Workflow (Optional)"):
         save_t1 = st.button('Save Selection')
 
     with t2:
-        check_intoduction = st.checkbox("Introduction.")
+        check_intoduction = st.checkbox(label="Introduction", key="advance_introduction")
         if check_intoduction:
-            st.multiselect("Model Provide", ["Bedrock", "OpenAI"])
+            st.selectbox("Model Provide", ["Bedrock", "OpenAI"])
 
         
 
