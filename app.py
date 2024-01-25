@@ -31,8 +31,27 @@ with st.expander("Customize Workflow (Optional)"):
         save_t1 = st.button('Save Selection')
 
     with t2:
-        check_intoduction = st.checkbox(label="Introduction", key="advance_in")
-        if check_intoduction:
+        check_in = st.checkbox(label="Introduction", key="advance_in")
+        if check_in:
+            model_provider = st.selectbox("Model Provider", ["Bedrock", "OpenAI"])
+            if model_provider == "Bedrock":
+                model =  st.selectbox("Model", ["anthropic.claude-v1", "anthropic.claude-v2","anthropic.claude-instant-v1"])
+                multiprompt = st.toggle("Granular-prompt")
+                if not multiprompt:
+                    prompt = st.text_input("Prompt")
+                else:
+                    p_human = st.text_input("p_human")
+                    p_task_context = st.text_input("p_task_context")
+                    p_tone_context = st.text_input("p_tone_context")
+                    p_data = st.text_input("p_data")
+                    p_task_description = st.text_input("p_task_description")
+                    p_example = st.text_input("p_example")
+                    p_conversation_history = st.text_input("p_conversation_history")
+                    p_thought_process = st.text_input("p_thought_process")
+                    p_formatting = st.text_input("p_formatting")
+                    p_assistant = st.text_input("p_assistant")
+        check_bh = st.checkbox(label="Introduction", key="advance_in")
+        if check_bh:
             model_provider = st.selectbox("Model Provider", ["Bedrock", "OpenAI"])
             if model_provider == "Bedrock":
                 model =  st.selectbox("Model", ["anthropic.claude-v1", "anthropic.claude-v2","anthropic.claude-instant-v1"])
