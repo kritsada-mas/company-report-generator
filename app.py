@@ -89,6 +89,7 @@ def create_workflow():
                     "Audiences": simple_au,
                     "Competitors": simple_co,
                 }
+            return saved_config
 
         with t2:
             st.write("This feature is currently in development")
