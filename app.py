@@ -125,6 +125,52 @@ def display_workflow_tabs(expander_state):
     if expander_state:
         t1, t2 = st.tabs(["Current Workflow", "temp"])
         with t1:
+<<<<<<< HEAD
+=======
+            simple_in = st.checkbox(label="Introduction", key="simple_in")
+            simple_bh = st.checkbox(label="Business Health", key="simple_bh")
+            simple_au = st.checkbox(label="Audiences", key="simple_au")
+            simple_co = st.checkbox(label="Competitors", key="simple_co")
+            save_t1 = st.button("Save Selection", key="simple_save")
+            saved_config = {
+                    "Introduction": simple_in,
+                    "Business Health": simple_bh,
+                    "Audiences": simple_au,
+                    "Competitors": simple_co,
+                }
+
+        with t2:
+            in_options = create_workflow_step_options(
+                "Introduction", "advance_in"
+            )
+            bh_options = create_workflow_step_options(
+                "Business Health", "advance_bh"
+            )
+            au_options = create_workflow_step_options(
+                "Audiences", "advance_au"
+            )
+            co_options = create_workflow_step_options(
+                "Competitors", "advance_co"
+            )
+            save_t2 = st.button("Save Selection", key="advanced_save")
+            saved_config = {
+                "Introduction": in_options,
+                "Business Health": bh_options,
+                "Audiences": au_options,
+                "Competitors": co_options,
+            }
+
+        with t3:
+            st.write("This feature is currently in development")
+            # save_t3 = st.button('Save Selection',key='custom_save')
+
+        (
+            tt1,
+            tt2,
+        ) = st.tabs(["Current Workflow", "temp"])
+
+        with tt1:
+>>>>>>> parent of 1e941aa (.)
             st.write("Current Workflow Configuration:")
 
             if expander_state["mode"] == "simple":
