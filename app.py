@@ -122,7 +122,7 @@ def display_workflow(workflow):
 
     with tt1:
         st.write("Current Workflow Configuration:")
-        st.json(workflow)
+        st.write(workflow)
         
     
 
