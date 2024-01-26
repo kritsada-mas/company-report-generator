@@ -44,8 +44,10 @@ def create_workflow():
     return saved_config
     
 def display_workflow(workflow):
-    st.write("Current Workflow Configuration:")
-    st.write(workflow)
+    t1,t2 = st.tabs(["User Selection", "Backend Workflow"])
+    with t1:
+        st.write("Current Workflow Configuration:")
+        st.write(workflow)
 
 if __name__ == "__main__":
     init_page()
@@ -54,7 +56,7 @@ if __name__ == "__main__":
     
     c1,c2 = st.columns(2)
     with c1:
-        create_report_submitted = st.button(label = 'Create a New Report', disabled = False)
+        create_report = st.button(label = 'Create a New Report', disabled = False)
         # if create_report_submitted: 
             # with st.spinner('creating report...'): create_new_report(create_report_form, input_url)
     with c2:
