@@ -123,6 +123,8 @@ def create_workflow():
         with tt1:
             st.write("Current Workflow Configuration:")
             st.json(saved_config)
+            
+        return saved_config
 
 
 if __name__ == "__main__":
