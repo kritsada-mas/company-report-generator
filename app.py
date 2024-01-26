@@ -22,10 +22,10 @@ def create_workflow():
         t1, t2, t3 = st.tabs(["Simple", "Advanced", "Fully Customize"])
 
         with t1:
-            simple_in = st.checkbox(label="Introduction", key="simple_in")
-            simple_bh = st.checkbox(label="Business Health", key="simple_bh")
-            simple_au = st.checkbox(label="Audiences", key="simple_au")
-            simple_co = st.checkbox(label="Competitors", key="simple_co")
+            simple_in = st.checkbox(label="Introduction", key="simple_in", value=True)
+            simple_bh = st.checkbox(label="Business Health", key="simple_bh", value=True)
+            simple_au = st.checkbox(label="Audiences", key="simple_au", value=True)
+            simple_co = st.checkbox(label="Competitors", key="simple_co", value=True)
             saved_config = {
                     "Introduction": simple_in,
                     "Business Health": simple_bh,
