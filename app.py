@@ -54,7 +54,7 @@ def simple_workflow_tabs():
         }
         return expander_state
     else:
-        return None
+        return {}
     
 def advanced_workflow_tabs():
     advanced_in = advanced_workflow_step_options("Introduction", "advance_in")
@@ -74,7 +74,7 @@ def advanced_workflow_tabs():
         }
         return expander_state
     else:
-        return None
+        return {}
 
 def advanced_workflow_step_options(label, key):
     check = st.checkbox(label=label, key=key)
