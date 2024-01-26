@@ -41,40 +41,32 @@ def simple_workflow_tabs():
     simple_bh = st.checkbox(label="Business Health", key="simple_bh")
     simple_au = st.checkbox(label="Audiences", key="simple_au")
     simple_co = st.checkbox(label="Competitors", key="simple_co")
-    save_t1 = st.button("Save Selection", key="simple_save")
-    if save_t1:
-        expander_state = {
-            "mode": "simple",
-            "body": {
-                "Introduction": simple_in,
-                "Business Health": simple_bh,
-                "Audiences": simple_au,
-                "Competitors": simple_co,
-            }
+    expander_state = {
+        "mode": "simple",
+        "body": {
+            "Introduction": simple_in,
+            "Business Health": simple_bh,
+            "Audiences": simple_au,
+            "Competitors": simple_co,
         }
-        return expander_state
-    else:
-        return {}
+    }
+    return expander_state
     
 def advanced_workflow_tabs():
     advanced_in = advanced_workflow_step_options("Introduction", "advance_in")
     advanced_bh = advanced_workflow_step_options("Business Health", "advance_bh")
     advanced_au = advanced_workflow_step_options("Audiences", "advance_au")
     advanced_co = advanced_workflow_step_options("Competitors", "advance_co")
-    save_t2 = st.button("Save Selection", key="advanced_save")
-    if save_t2:
-        expander_state = {
-            "mode": "advanced",
-            "body": {
-                "Introduction": advanced_in,
-                "Business Health": advanced_bh,
-                "Audiences": advanced_au,
-                "Competitors": advanced_co,
-            }
+    expander_state = {
+        "mode": "advanced",
+        "body": {
+            "Introduction": advanced_in,
+            "Business Health": advanced_bh,
+            "Audiences": advanced_au,
+            "Competitors": advanced_co,
         }
-        return expander_state
-    else:
-        return {}
+    }
+    return expander_state
 
 def advanced_workflow_step_options(label, key):
     check = st.checkbox(label=label, key=key)
