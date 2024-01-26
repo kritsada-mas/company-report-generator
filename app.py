@@ -51,13 +51,13 @@ def map_workflow(workflow):
     
     # Remove branches based on user-selected workflow
     if not workflow["Introduction"]:
-        default_workflow["body"]["workflow"] = [step for step in default_workflow["body"]["workflow"] if step["name"] != "llm_generate_introduction"]
+        default_workflow["body"]["workflow"] = [step for step in default_workflow["body"]["workflow"] if step["branch_name"] != "introduction"]
     if not workflow["Business Health"]:
-        default_workflow["body"]["workflow"] = [step for step in default_workflow["body"]["workflow"] if step["name"] != "llm_generate_business_health"]
+        default_workflow["body"]["workflow"] = [step for step in default_workflow["body"]["workflow"] if step["branch_name"] != "business_health"]
     if not workflow["Audiences"]:
-        default_workflow["body"]["workflow"] = [step for step in default_workflow["body"]["workflow"] if step["name"] != "llm_generate_audience"]
+        default_workflow["body"]["workflow"] = [step for step in default_workflow["body"]["workflow"] if step["branch_name"] != "audience"]
     if not workflow["Competitors"]:
-        default_workflow["body"]["workflow"] = [step for step in default_workflow["body"]["workflow"] if step["name"] != "llm_generate_competitors"]
+        default_workflow["body"]["workflow"] = [step for step in default_workflow["body"]["workflow"] if step["branch_name"] != "competitors"]
     
     return default_workflow
 
