@@ -118,7 +118,7 @@ def create_workflow():
         (
             tt1,
             tt2,
-        ) = st.tabs(["Current Workflow", "temp"])
+        ) = st.tabs(["Current Workflow", "Backend workflow"])
 
         with tt1:
             st.write("Current Workflow Configuration:")
