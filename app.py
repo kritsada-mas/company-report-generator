@@ -49,4 +49,7 @@ if __name__ == "__main__":
     init_page()
     user_input = get_user_input()
     workflow = create_workflow()
-    display_workflow(workflow)
+    
+    c1,c2 = st.columns(2)
+    with c2:
+        display_workflow(workflow)
