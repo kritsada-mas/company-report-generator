@@ -1,6 +1,7 @@
 import streamlit as st
 import json
 
+expander_state = {}
 
 def init_page():
     st.set_page_config(page_title="AI Company Reports")
@@ -19,7 +20,6 @@ def company_url_text_input():
     )
 
 def customize_workflow_expander():
-    expander_state = {}
     with st.expander("Customize Workflow (Optional)"):
         t1, t2, t3 = st.tabs(["Simple", "Advanced", "Fully Customize"])
 
@@ -130,21 +130,24 @@ def advanced_workflow_step_options(label, key):
     return None, None
 
 def display_workflow_tabs(expander_state):
-    t1, t2, = st.tabs(["Current Workflow", "temp"])
-    with t1:
-        st.write("Current Workflow Configuration:")
+    if expander_state:
+        t1, t2 = st.tabs(["Current Workflow", "temp"])
+        with t1:
+            st.write("Current Workflow Configuration:")
 
-        if expander_state["mode"] == "simple":
-            st.write("Simple workflow")
-            st.json(expander_state)
-        elif expander_state["mode"] == "advanced":
-            st.write("Advanced workflow")
-            st.json(expander_state)
-        else:
-            st.write("Default workflow")
-            
-    with t2:
-        pass
+            if expander_state["mode"] == "simple":
+                st.write("Simple workflow")
+                st.json(expander_state)
+            elif expander_state["mode"] == "advanced":
+                st.write("Advanced workflow")
+                st.json(expander_state)
+            else:
+                st.write("Default workflow")
+                
+        with t2:
+            pass
+    else:
+        st.write("No workflow configuration saved.")
 
 # def workflow_advanced_options(model_type, model_options, use_multiprompt):
 #     selected_model = st.selectbox("Model", model_options)
