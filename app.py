@@ -1,4 +1,6 @@
 import streamlit as st
+from api_handler import create_new_report, get_existing_report
+
 
 def init_page():
     st.set_page_config(page_title="AI Company Reports")
@@ -51,5 +53,9 @@ if __name__ == "__main__":
     workflow = create_workflow()
     
     c1,c2 = st.columns(2)
+    with c1:
+        create_report_submitted = st.button(label = 'Create a New Report', disabled = False)
+        # if create_report_submitted: 
+            # with st.spinner('creating report...'): create_new_report(create_report_form, input_url)
     with c2:
         display_workflow(workflow)
