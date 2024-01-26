@@ -93,26 +93,22 @@ def create_workflow():
                     }
 
         with t2:
-            in_options = create_workflow_step_options(
-                "Introduction", "advance_in"
-            )
-            bh_options = create_workflow_step_options(
-                "Business Health", "advance_bh"
-            )
-            au_options = create_workflow_step_options(
-                "Audiences", "advance_au"
-            )
-            co_options = create_workflow_step_options(
-                "Competitors", "advance_co"
-            )
-            save_t2 = st.button("Save Selection", key="advanced_save")
-            if save_t2:
-                saved_config = {
-                    "Introduction": in_options,
-                    "Business Health": bh_options,
-                    "Audiences": au_options,
-                    "Competitors": co_options,
-                }
+            in_options = create_workflow_step_options("Introduction", "advance_in")
+            bh_options = create_workflow_step_options("Business Health", "advance_bh")
+            au_options = create_workflow_step_options("Audiences", "advance_au")
+            co_options = create_workflow_step_options("Competitors", "advance_co")
+            save_t2_in = st.button("Save Introduction", key="advanced_save_in")
+            save_t2_bh = st.button("Save Business Health", key="advanced_save_bh")
+            save_t2_au = st.button("Save Audiences", key="advanced_save_au")
+            save_t2_co = st.button("Save Competitors", key="advanced_save_co")
+            if save_t2_in:
+                saved_config["Introduction"] = in_options
+            if save_t2_bh:
+                saved_config["Business Health"] = bh_options
+            if save_t2_au:
+                saved_config["Audiences"] = au_options
+            if save_t2_co:
+                saved_config["Competitors"] = co_options
 
         with t3:
             st.write("This feature is currently in development")
