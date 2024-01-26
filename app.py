@@ -137,10 +137,10 @@ def display_workflow_tabs(expander_state):
 
             if expander_state["mode"] == "simple":
                 st.write("Simple workflow")
-                st.json(expander_state)
+                st.json(expander_state["body"])
             elif expander_state["mode"] == "advanced":
                 st.write("Advanced workflow")
-                st.json(expander_state)
+                st.json(expander_state["body"])
             else:
                 st.write("Default workflow")
                 
@@ -148,6 +148,7 @@ def display_workflow_tabs(expander_state):
             pass
     else:
         st.write("No workflow configuration saved.")
+
 
 # def workflow_advanced_options(model_type, model_options, use_multiprompt):
 #     selected_model = st.selectbox("Model", model_options)
