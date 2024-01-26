@@ -48,16 +48,20 @@ def create_workflow():
 def map_workflow(workflow):
     with open("default_workflow.json", "r") as f:
         default_workflow = json.load(f)
+        
+    parallel_step = default_workflow["body"]["workflow"][3]
     
     # Remove branches based on user-selected workflow
     if not workflow["Introduction"]:
-        default_workflow["body"]["workflow"] = [step for step in default_workflow["body"]["workflow"] if step["branch_name"] != "introduction"]
+        parallel_step = [step for step in parallel_step if step["branch_name"] != "introduction"]
     if not workflow["Business Health"]:
-        default_workflow["body"]["workflow"] = [step for step in default_workflow["body"]["workflow"] if step["branch_name"] != "business_health"]
+        parallel_step = [step for step in parallel_step if step["branch_name"] != "business_health"]
     if not workflow["Audiences"]:
-        default_workflow["body"]["workflow"] = [step for step in default_workflow["body"]["workflow"] if step["branch_name"] != "audience"]
+        parallel_step = [step for step in parallel_step if step["branch_name"] != "audience"]
     if not workflow["Competitors"]:
-        default_workflow["body"]["workflow"] = [step for step in default_workflow["body"]["workflow"] if step["branch_name"] != "competitors"]
+        parallel_step = [step for step in parallel_step if step["branch_name"] != "competitors"]
+    
+    default_workflow["body"]["workflow"][3] = parallel_step
     
     return default_workflow
 
