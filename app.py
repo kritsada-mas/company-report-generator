@@ -1,5 +1,6 @@
 import streamlit as st
 from api_handler import create_new_report, get_existing_report
+import json
 
 
 def init_page():
@@ -43,11 +44,33 @@ def create_workflow():
             
     return saved_config
     
+    
+def map_workflow(workflow):
+    with open("default_workflow.json", "r") as f:
+        default_workflow = json.load(f)
+    
+    # Remove branches based on user-selected workflow
+    if not workflow["Introduction"]:
+        default_workflow["body"]["workflow"] = [step for step in default_workflow["body"]["workflow"] if step["name"] != "llm_generate_introduction"]
+    if not workflow["Business Health"]:
+        default_workflow["body"]["workflow"] = [step for step in default_workflow["body"]["workflow"] if step["name"] != "llm_generate_business_health"]
+    if not workflow["Audiences"]:
+        default_workflow["body"]["workflow"] = [step for step in default_workflow["body"]["workflow"] if step["name"] != "llm_generate_audience"]
+    if not workflow["Competitors"]:
+        default_workflow["body"]["workflow"] = [step for step in default_workflow["body"]["workflow"] if step["name"] != "llm_generate_competitors"]
+    
+    return default_workflow
+
 def display_workflow(workflow):
     t1,t2 = st.tabs(["User Selection", "Backend Workflow"])
     with t1:
         st.write("Current Workflow Configuration:")
         st.write(workflow)
+        
+    with t2:
+        backend_workflow = map_workflow(workflow)
+        st.write("Backend Workflow:")
+        st.write(backend_workflow)
 
 if __name__ == "__main__":
     init_page()
