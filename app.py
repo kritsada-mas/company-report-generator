@@ -115,19 +115,20 @@ def create_workflow():
             st.write("This feature is currently in development")
             # save_t3 = st.button('Save Selection',key='custom_save')
 
-        (
-            tt1,
-            tt2,
-        ) = st.tabs(["Current Workflow", "Backend workflow"])
+        
+    
+def display_workflow(workflow):
+    tt1, tt2 = st.tabs(["Current Workflow", "Backend workflow"])
 
-        with tt1:
-            st.write("Current Workflow Configuration:")
-            st.json(saved_config)
-            
-        return saved_config
+    with tt1:
+        st.write("Current Workflow Configuration:")
+        st.json(workflow)
+        
+    
 
 
 if __name__ == "__main__":
     init_page()
     user_input = get_user_input()
     workflow = create_workflow()
+    display_workflow(workflow)
