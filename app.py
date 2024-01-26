@@ -51,19 +51,22 @@ def map_workflow(workflow):
         
     parallel_step = default_workflow["body"]["workflow"][3]
     
-    # Remove branches based on user-selected workflow
-    if not workflow["Introduction"]:
-        parallel_step = [step for step in parallel_step if step["branch_name"] != "introduction"]
-    if not workflow["Business Health"]:
-        parallel_step = [step for step in parallel_step if step["branch_name"] != "business_health"]
-    if not workflow["Audiences"]:
-        parallel_step = [step for step in parallel_step if step["branch_name"] != "audience"]
-    if not workflow["Competitors"]:
-        parallel_step = [step for step in parallel_step if step["branch_name"] != "competitors"]
-    
-    default_workflow["body"]["workflow"][3] = parallel_step
+    # Check if all workflow options are False, indicating no branch should be included
+    if not any(workflow.values()):
+        default_workflow["body"]["workflow"] = default_workflow["body"]["workflow"][:3]  # Remove the parallel step
+    else:
+        # Remove branches based on user-selected workflow
+        if not workflow["Introduction"]:
+            parallel_step["branches"] = [branch for branch in parallel_step["branches"] if branch["branch_name"] != "introduction"]
+        if not workflow["Business Health"]:
+            parallel_step["branches"] = [branch for branch in parallel_step["branches"] if branch["branch_name"] != "business_health"]
+        if not workflow["Audiences"]:
+            parallel_step["branches"] = [branch for branch in parallel_step["branches"] if branch["branch_name"] != "audience"]
+        if not workflow["Competitors"]:
+            parallel_step["branches"] = [branch for branch in parallel_step["branches"] if branch["branch_name"] != "competitors"]
     
     return default_workflow
+
 
 def display_workflow(workflow):
     t1,t2 = st.tabs(["User Selection", "Backend Workflow"])
