@@ -1,6 +1,6 @@
 import logging
 import requests
-from constants import GENERATE_COMPANY_REPORT_ENDPOINT, GET_PROGRESS_ENDPOINT, API_KEY
+from companents.constants import GENERATE_COMPANY_REPORT_ENDPOINT, GET_PROGRESS_ENDPOINT, API_KEY
 
 def create_new_report(form_obj, company_webpage_url):
     # client-side validation
