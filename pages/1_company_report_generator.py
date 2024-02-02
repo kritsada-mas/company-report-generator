@@ -1,8 +1,8 @@
 import streamlit as st
-import time
-import numpy as np
 import components.authenticate as authenticate
-
+import components.workflow as workflow
+from components.constants import IGNORE_AUTHORIZATION_GROUP
+from components.api_handler import upload_workflow, create_new_report, get_existing_report
 
 
 # Page configuration
@@ -11,6 +11,7 @@ hide_streamlit_style = "<style> footer { visibility: hidden; } </style>"
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 # st.subheader("Company Report Generator", divider="rainbow")
 st.subheader("Company Report Generator")
+workflow_name = "default"
 
 # Check authentication
 authenticate.set_st_state_vars()
@@ -21,19 +22,16 @@ if st.session_state["authenticated"]:
 else:
     authenticate.button_login()
 
-if (st.session_state["authenticated"] and "demo" in st.session_state["user_cognito_groups"]):
+if (
+    (st.session_state["authenticated"]) and 
+    (("demo" in st.session_state["user_cognito_groups"]) or IGNORE_AUTHORIZATION_GROUP)
+    ):
     st.write("Harness the power of generative AI to create insightful company reports")
-    st.text_input(
-        label="Company Webpage URL",
-        placeholder="",
-        value="",
-        disabled=False,
-        help="This can be any webpage that provides basic information about the company (e.g. https://fluxus.io).",
-    )
+    
     
     with st.sidebar:
-        with st.expander("Customize Workflow (Optional)"):
-            t1, t2, t3 = st.tabs(["Simple", "Advanced", "Fully Customize"])
+        with st.expander("Customize Report (Optional)"):
+            t1, t2 = st.tabs(["Report Generation", "Report Template"])
             with t1:
                 simple_in = st.checkbox(label="Introduction", key="simple_in", value=True)
                 simple_bh = st.checkbox(label="Business Health", key="simple_bh", value=True)
@@ -45,12 +43,22 @@ if (st.session_state["authenticated"] and "demo" in st.session_state["user_cogni
                         "Audiences": simple_au,
                         "Competitors": simple_co,
                     }
+                
+                if st.button("Confirm Selection"):
+                    workflow_body, workflow_name = workflow.map_workflow(saved_config)
+                    with st.spinner('Uploading workflow...'): upload_workflow(workflow_body)
             with t2:
-                st.write("Advanced workflow is currently in development")
-            with t3:
-                st.write("Fully customize workflow is currently in development")
+                st.write("Report Template is currently in development")
         with st.expander("History"):
             st.write("History is currently in development")
+    
+    
+    create_report_form = st.form(key = 'create_report')
+    input_url = create_report_form.text_input(label = 'Company Webpage URL', placeholder = '', value = '', disabled = False, help = 'This can be any webpage that provides basic information about the company (e.g. https://fluxus.io).')
+    create_report_submitted = create_report_form.form_submit_button(label = 'Create a New Report', disabled = False)
+    if create_report_submitted: 
+        with st.spinner('creating report...'): create_new_report(workflow_name, create_report_form, input_url)
+    
 
 else:
     if st.session_state["authenticated"]:
