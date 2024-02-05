@@ -14,6 +14,7 @@ hide_streamlit_style = "<style> footer { visibility: hidden; } </style>"
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 # st.subheader("Company Report Generator", divider="rainbow")
 st.subheader("Company Report Generator")
+st.session_state.workflow_name = "default"
 
 
 if REMOVE_AUTHENTICATION:
