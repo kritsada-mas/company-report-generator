@@ -4,6 +4,8 @@ import components.workflow as workflow
 from components.constants import IGNORE_AUTHORIZATION_GROUP, REMOVE_AUTHENTICATION
 from components.api_handler import upload_workflow, create_new_report, get_existing_report
 
+# Declare workflow_name globally
+workflow_name = ""
 
 # Page configuration
 st.set_page_config(page_title="Company Report Generator", page_icon="📈")
@@ -16,7 +18,7 @@ st.subheader("Company Report Generator")
 if REMOVE_AUTHENTICATION:
     authorized = True
 else:
-    # Check authentication when user lands on the home page.
+    # Check authentication when the user lands on the home page.
     authenticate.set_st_state_vars()
     authorized = st.session_state["authenticated"]
 
@@ -28,14 +30,8 @@ else:
         st.write("Please login?")
         authenticate.button_login()
 
-if (
-    (authorized)
-    # and 
-    # (("demo" in st.session_state["user_cognito_groups"]) or IGNORE_AUTHORIZATION_GROUP)
-    ):
+if authorized:
     st.write("Harness the power of generative AI to create insightful company reports")
-    
-    
     
     with st.sidebar:
         with st.expander("Customize Report (Optional)"):
@@ -53,6 +49,7 @@ if (
                     }
                 
                 if st.button("Confirm Selection"):
+                    global workflow_name  # Declare workflow_name as global
                     workflow_body, workflow_name = workflow.map_workflow(saved_config)
                     with st.spinner('Uploading workflow...'):
                         upload_workflow(workflow_body)
@@ -60,17 +57,14 @@ if (
                 st.write("Report Template is currently in development")
         with st.expander("History"):
             st.write("History is currently in development")
-            if workflow_name:
-                st.write(workflow_name)
+            st.write(workflow_name)
     
-    
-    create_report_form = st.form(key = 'create_report')
-    input_url = create_report_form.text_input(label = 'Company Webpage URL', placeholder = '', value = '', disabled = False, help = 'This can be any webpage that provides basic information about the company (e.g. https://fluxus.io).')
-    create_report_submitted = create_report_form.form_submit_button(label = 'Create a New Report', disabled = False)
+    create_report_form = st.form(key='create_report')
+    input_url = create_report_form.text_input(label='Company Webpage URL', placeholder='', value='', disabled=False, help='This can be any webpage that provides basic information about the company (e.g. https://fluxus.io).')
+    create_report_submitted = create_report_form.form_submit_button(label='Create a New Report', disabled=False)
     if create_report_submitted: 
         with st.spinner('creating report...'): create_new_report(workflow_name, create_report_form, input_url)
     
-
 else:
     if authorized:
         st.write("You do not have access. Please contact the administrator.")
