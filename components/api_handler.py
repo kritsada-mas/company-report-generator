@@ -39,21 +39,21 @@ def create_new_report(workflow_name, form_obj, company_webpage_url):
         headers = {"content-type": "application/json"}
         data = {"input_url": company_webpage_url, "workflow_name": workflow_name}
 
-        # try:
-        response = requests.post(
-            GENERATE_COMPANY_REPORT_ENDPOINT, headers=headers, json=data
-        )
-        response_json = response.json()
-        
-        form_obj.info(
-            "Our AI agent is in the process of generating your report, this could take up to 3 minutes to complete. Please fill the form below using the following report ID to get the result:"
-        )
-        form_obj.code(response_json["transactionID"])
-        # except Exception as e:
-        #     logging.error(str(e))
-        #     form_obj.error(
-        #         "An unexpected error occurred, please try again. If this error persists, send an email to 'info@fluxus.io'."
-        #     )
+        try:
+            response = requests.post(
+                GENERATE_COMPANY_REPORT_ENDPOINT, headers=headers, json=data
+            )
+            response_json = response.json()
+            
+            form_obj.info(
+                "Our AI agent is in the process of generating your report, this could take up to 3 minutes to complete. Please fill the form below using the following report ID to get the result:"
+            )
+            form_obj.code(response_json["transactionID"])
+        except Exception as e:
+            logging.error(str(e))
+            form_obj.error(
+                "An unexpected error occurred, please try again. If this error persists, send an email to 'info@fluxus.io'."
+            )
 
 
 def get_existing_report(form_obj, report_id):
