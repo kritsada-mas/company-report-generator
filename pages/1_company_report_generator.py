@@ -28,15 +28,6 @@ else:
         st.write("Please login?")
         authenticate.button_login()
 
-# Check authentication
-authenticate.set_st_state_vars()
-
-# Add login/logout buttons
-if st.session_state["authenticated"]:
-    authenticate.button_logout()
-else:
-    authenticate.button_login()
-
 if (
     (authorized) and 
     (("demo" in st.session_state["user_cognito_groups"]) or IGNORE_AUTHORIZATION_GROUP)
