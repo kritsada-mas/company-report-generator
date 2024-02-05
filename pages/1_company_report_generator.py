@@ -3,14 +3,9 @@ import components.authenticate as authenticate
 import components.workflow as workflow
 from components.constants import IGNORE_AUTHORIZATION_GROUP, REMOVE_AUTHENTICATION
 from components.api_handler import upload_workflow, create_new_report, get_existing_report
-# Initialize workflow_name globally
-workflow_name = "default"
 
-def initialize_workflow_name():
-    global workflow_name
-    workflow_name = "default"  # Or any other default value you want
-
-initialize_workflow_name()
+# Initialize workflow_name globally using st.session_state
+st.session_state['workflow_name'] = "default"
 
 # Page configuration
 st.set_page_config(page_title="Company Report Generator", page_icon="📈")
@@ -59,7 +54,7 @@ if (
                     }
                 
                 if st.button("Confirm Selection"):
-                    workflow_body, workflow_name = workflow.map_workflow(saved_config)
+                    workflow_body, st.session_state['workflow_name'] = workflow.map_workflow(saved_config)
                     with st.spinner('Uploading workflow...'): upload_workflow(workflow_body)
             with t2:
                 st.write("Report Template is currently in development")
@@ -68,12 +63,10 @@ if (
     
     
     create_report_form = st.form(key = 'create_report')
-    workflow_name = workflow_name
-    st.write(workflow_name)
     input_url = create_report_form.text_input(label = 'Company Webpage URL', placeholder = '', value = '', disabled = False, help = 'This can be any webpage that provides basic information about the company (e.g. https://fluxus.io).')
     create_report_submitted = create_report_form.form_submit_button(label = 'Create a New Report', disabled = False)
     if create_report_submitted: 
-        with st.spinner('creating report...'): create_new_report(workflow_name, create_report_form, input_url)
+        with st.spinner('creating report...'): create_new_report(st.session_state['workflow_name'], create_report_form, input_url)
     
 
 else:
