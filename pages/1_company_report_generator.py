@@ -53,7 +53,9 @@ if (
                 
                 if st.button("Confirm Selection"):
                     workflow_body, workflow_name = workflow.map_workflow(saved_config)
-                    with st.spinner('Uploading workflow...'): upload_workflow(workflow_body)
+                    with st.spinner('Uploading workflow...'):
+                        upload_workflow(workflow_body)
+                        workflow_name = workflow_name
             with t2:
                 st.write("Report Template is currently in development")
         with st.expander("History"):
