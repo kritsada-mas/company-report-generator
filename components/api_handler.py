@@ -63,31 +63,31 @@ def get_existing_report(form_obj, report_id):
     else:
         # send HTTP GET request to API endpoint
         headers = {"content-type": "application/json"}
-        # try:
-        response = requests.get(
-            f"{GET_PROGRESS_ENDPOINT}{report_id}", headers=headers
-        )
-        response_json = response.json()
-        message = response_json["message"]
-        # form_obj.info(response_json)
-        # check for errors
-        if "generating" in message:
-            form_obj.info(
-                "Our AI agent is still in the process of generating your report. Please be patient, and retry in one minute."
+        try:
+            response = requests.get(
+                f"{GET_PROGRESS_ENDPOINT}{report_id}", headers=headers
             )
-        elif "failed" in message:
+            response_json = response.json()
+            message = response_json["message"]
+            # form_obj.info(response_json)
+            # check for errors
+            if "generating" in message:
+                form_obj.info(
+                    "Our AI agent is still in the process of generating your report. Please be patient, and retry in one minute."
+                )
+            elif "failed" in message:
+                form_obj.error(
+                    "The company report failed to generate. Please try re-creating the report using the form above. If this error persists, please contact 'info@fluxus.io'."
+                )
+            else:
+                # display report on screen
+                report = response_json["report"]
+                form_obj.success("Please find your report in JSON format below:")
+                form_obj.divider()
+                form_obj.json(report)
+                form_obj.divider()
+        except Exception as e:
+            logging.error(str(e))
             form_obj.error(
-                "The company report failed to generate. Please try re-creating the report using the form above. If this error persists, please contact 'info@fluxus.io'."
+                "An unexpected error occurred, please try again. If this error persists, send an email to 'info@fluxus.io'."
             )
-        else:
-            # display report on screen
-            report = response_json["report"]
-            form_obj.success("Please find your report in JSON format below:")
-            form_obj.divider()
-            form_obj.json(report)
-            form_obj.divider()
-        # except Exception as e:
-        #     logging.error(str(e))
-        #     form_obj.error(
-        #         "An unexpected error occurred, please try again. If this error persists, send an email to 'info@fluxus.io'."
-        #     )
