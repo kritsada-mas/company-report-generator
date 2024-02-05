@@ -81,7 +81,7 @@ def get_existing_report(form_obj, report_id):
             )
         else:
             # display report on screen
-            report = response_json["body"]["report"]
+            report = response_json["report"]
             form_obj.success("Please find your report in JSON format below:")
             form_obj.divider()
             form_obj.json(report)
