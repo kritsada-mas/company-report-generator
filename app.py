@@ -9,19 +9,19 @@ st.set_page_config(
 
 st.write("# Welcome to Fluxus AI/ML! 👋")
 
-# Check authentication when user lands on the home page.
-authenticate.set_st_state_vars()
-
 if REMOVE_AUTHENTICATION:
-    st.session_state["authenticated"] = True
-
-# Add login/logout buttons
-if st.session_state["authenticated"]:
     st.write("Hi")
-    if not REMOVE_AUTHENTICATION: authenticate.button_logout()
 else:
-    st.write("Please login")
-    if not REMOVE_AUTHENTICATION: authenticate.button_login()
+    # Check authentication when user lands on the home page.
+    authenticate.set_st_state_vars()
+
+    # Add login/logout buttons
+    if st.session_state["authenticated"]:
+        st.write("Hi")
+        authenticate.button_logout()
+    else:
+        st.write("Please login")
+        authenticate.button_login()
 
 
 
