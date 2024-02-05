@@ -44,12 +44,11 @@ def create_new_report(workflow_name, form_obj, company_webpage_url):
             GENERATE_COMPANY_REPORT_ENDPOINT, headers=headers, json=data
         )
         response_json = response.json()
-        form_obj.info(response_json)
         
-        # form_obj.info(
-        #     "Our AI agent is in the process of generating your report, this could take up to 3 minutes to complete. Please fill the form below using the following report ID to get the result:"
-        # )
-        # form_obj.code(response.json()["body"]["transactionID"])
+        form_obj.info(
+            "Our AI agent is in the process of generating your report, this could take up to 3 minutes to complete. Please fill the form below using the following report ID to get the result:"
+        )
+        form_obj.code(response_json["transactionID"])
         # except Exception as e:
         #     logging.error(str(e))
         #     form_obj.error(
