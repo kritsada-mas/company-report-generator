@@ -68,17 +68,10 @@ def get_existing_report(form_obj, report_id):
             f"{GET_PROGRESS_ENDPOINT}{report_id}", headers=headers
         )
         response_json = response.json()
-        status_code = response_json["statusCode"]
         message = response_json["message"]
         form_obj.info(response_json)
         # check for errors
-        if status_code == 400:
-            form_obj.error(
-                "This report ID does not exist. Please create a new report using the form above or input a valid report ID."
-            )
-        elif status_code == 500:
-            form_obj.error(message)
-        elif "generating" in message:
+        if "generating" in message:
             form_obj.info(
                 "Our AI agent is still in the process of generating your report. Please be patient, and retry in one minute."
             )
