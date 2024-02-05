@@ -69,7 +69,7 @@ def get_existing_report(form_obj, report_id):
             )
             response_json = response.json()
             status_code = response_json["statusCode"]
-            message = response_json["body"]["message"]
+            message = response_json["message"]
             # check for errors
             if status_code == 400:
                 form_obj.error(
