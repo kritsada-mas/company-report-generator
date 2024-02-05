@@ -62,7 +62,7 @@ def get_existing_report(form_obj, report_id):
         form_obj.error("Please input a report ID.")
     else:
         # send HTTP GET request to API endpoint
-        headers = {"x-api-key": API_KEY, "content-type": "application/json"}
+        headers = {"content-type": "application/json"}
         try:
             response = requests.get(
                 f"{GET_PROGRESS_ENDPOINT}{report_id}", headers=headers
