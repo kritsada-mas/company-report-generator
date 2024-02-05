@@ -12,6 +12,7 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 # st.subheader("Company Report Generator", divider="rainbow")
 st.subheader("Company Report Generator")
 
+
 if REMOVE_AUTHENTICATION:
     authorized = True
 else:
@@ -33,7 +34,6 @@ if (
     # (("demo" in st.session_state["user_cognito_groups"]) or IGNORE_AUTHORIZATION_GROUP)
     ):
     st.write("Harness the power of generative AI to create insightful company reports")
-    workflow_name = "default"
     
     
     
