@@ -60,7 +60,8 @@ if (
                 st.write("Report Template is currently in development")
         with st.expander("History"):
             st.write("History is currently in development")
-            st.write(workflow_name)
+            if workflow_name:
+                st.write(workflow_name)
     
     
     create_report_form = st.form(key = 'create_report')
