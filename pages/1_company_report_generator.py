@@ -3,6 +3,7 @@ import components.authenticate as authenticate
 import components.workflow as workflow
 from components.constants import IGNORE_AUTHORIZATION_GROUP, REMOVE_AUTHENTICATION
 from components.api_handler import upload_workflow, create_new_report, get_existing_report
+workflow_name = "default"
 
 
 # Page configuration
@@ -36,7 +37,6 @@ if (
     
     
     with st.sidebar:
-        workflow_name = "default"
         
         with st.expander("Customize Report (Optional)"):
             t1, t2 = st.tabs(["Report Generation", "Report Template"])
