@@ -4,8 +4,9 @@ import components.workflow as workflow
 from components.constants import IGNORE_AUTHORIZATION_GROUP, REMOVE_AUTHENTICATION
 from components.api_handler import upload_workflow, create_new_report, get_existing_report
 
-# Declare workflow_name globally
-workflow_name = ""
+# Initialize workflow_name globally
+def update_workflow_name(workflow_name):
+    return workflow_name
 
 # Page configuration
 st.set_page_config(page_title="Company Report Generator", page_icon="📈")
@@ -35,7 +36,7 @@ if authorized:
     
     with st.sidebar:
         with st.expander("Customize Report (Optional)"):
-            t1, t2 = st.tabs(["Report Generation", "Report Template"])
+            t1, t2 = st.columns([1, 1])
             with t1:
                 simple_in = st.checkbox(label="Introduction", key="simple_in", value=True)
                 simple_bh = st.checkbox(label="Business Health", key="simple_bh", value=True)
@@ -49,21 +50,20 @@ if authorized:
                     }
                 
                 if st.button("Confirm Selection"):
-                    global workflow_name  # Declare workflow_name as global
-                    workflow_body, workflow_name = workflow.map_workflow(saved_config)
+                    workflow_body, st.session_state.workflow_name = workflow.map_workflow(saved_config)
                     with st.spinner('Uploading workflow...'):
                         upload_workflow(workflow_body)
             with t2:
                 st.write("Report Template is currently in development")
         with st.expander("History"):
             st.write("History is currently in development")
-            st.write(workflow_name)
+            st.write(st.session_state.workflow_name)
     
     create_report_form = st.form(key='create_report')
     input_url = create_report_form.text_input(label='Company Webpage URL', placeholder='', value='', disabled=False, help='This can be any webpage that provides basic information about the company (e.g. https://fluxus.io).')
     create_report_submitted = create_report_form.form_submit_button(label='Create a New Report', disabled=False)
-    if create_report_submitted: 
-        with st.spinner('creating report...'): create_new_report(workflow_name, create_report_form, input_url)
+    if create_report_submitted:
+        with st.spinner('creating report...'): create_new_report(st.session_state.workflow_name, create_report_form, input_url)
     
 else:
     if authorized:
