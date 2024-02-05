@@ -11,7 +11,6 @@ hide_streamlit_style = "<style> footer { visibility: hidden; } </style>"
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 # st.subheader("Company Report Generator", divider="rainbow")
 st.subheader("Company Report Generator")
-workflow_name = "default"
 
 if REMOVE_AUTHENTICATION:
     authorized = True
@@ -36,6 +35,8 @@ if (
     
     
     with st.sidebar:
+        workflow_name = "default"
+        
         with st.expander("Customize Report (Optional)"):
             t1, t2 = st.tabs(["Report Generation", "Report Template"])
             with t1:
