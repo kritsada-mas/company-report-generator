@@ -5,7 +5,7 @@ from components.constants import IGNORE_AUTHORIZATION_GROUP, REMOVE_AUTHENTICATI
 from components.api_handler import upload_workflow, create_new_report, get_existing_report
 
 # Initialize workflow_name globally using st.session_state
-st.session_state['workflow_name'] = "default"
+# st.session_state['workflow_name'] = "default"
 
 # Page configuration
 st.set_page_config(page_title="Company Report Generator", page_icon="📈")
