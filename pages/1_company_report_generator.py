@@ -33,11 +33,11 @@ if (
     # (("demo" in st.session_state["user_cognito_groups"]) or IGNORE_AUTHORIZATION_GROUP)
     ):
     st.write("Harness the power of generative AI to create insightful company reports")
+    workflow_name = "default"
+    
     
     
     with st.sidebar:
-        workflow_name = "default"
-        
         with st.expander("Customize Report (Optional)"):
             t1, t2 = st.tabs(["Report Generation", "Report Template"])
             with t1:
@@ -56,11 +56,11 @@ if (
                     workflow_body, workflow_name = workflow.map_workflow(saved_config)
                     with st.spinner('Uploading workflow...'):
                         upload_workflow(workflow_body)
-                        workflow_name = workflow_name
             with t2:
                 st.write("Report Template is currently in development")
         with st.expander("History"):
             st.write("History is currently in development")
+            st.write(workflow_name)
     
     
     create_report_form = st.form(key = 'create_report')
