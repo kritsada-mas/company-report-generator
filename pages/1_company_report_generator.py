@@ -1,7 +1,7 @@
 import streamlit as st
 import components.authenticate as authenticate
 import components.workflow as workflow
-from components.constants import IGNORE_AUTHORIZATION_GROUP
+from components.constants import IGNORE_AUTHORIZATION_GROUP, REMOVE_AUTHENTICATION
 from components.api_handler import upload_workflow, create_new_report, get_existing_report
 
 
@@ -13,6 +13,21 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 st.subheader("Company Report Generator")
 workflow_name = "default"
 
+if REMOVE_AUTHENTICATION:
+    authorized = True
+else:
+    # Check authentication when user lands on the home page.
+    authenticate.set_st_state_vars()
+    authorized = st.session_state["authenticated"]
+
+    # Add login/logout buttons
+    if authorized:
+        st.write("Hi")
+        authenticate.button_logout()
+    else:
+        st.write("Please login?")
+        authenticate.button_login()
+
 # Check authentication
 authenticate.set_st_state_vars()
 
@@ -23,7 +38,7 @@ else:
     authenticate.button_login()
 
 if (
-    (st.session_state["authenticated"]) and 
+    (authorized) and 
     (("demo" in st.session_state["user_cognito_groups"]) or IGNORE_AUTHORIZATION_GROUP)
     ):
     st.write("Harness the power of generative AI to create insightful company reports")
@@ -61,7 +76,7 @@ if (
     
 
 else:
-    if st.session_state["authenticated"]:
+    if authorized:
         st.write("You do not have access. Please contact the administrator.")
     else:
         st.write("Please login!")
