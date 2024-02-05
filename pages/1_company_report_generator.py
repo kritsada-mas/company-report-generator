@@ -28,8 +28,9 @@ else:
         authenticate.button_login()
 
 if (
-    (authorized) and 
-    (("demo" in st.session_state["user_cognito_groups"]) or IGNORE_AUTHORIZATION_GROUP)
+    (authorized)
+    # and 
+    # (("demo" in st.session_state["user_cognito_groups"]) or IGNORE_AUTHORIZATION_GROUP)
     ):
     st.write("Harness the power of generative AI to create insightful company reports")
     
