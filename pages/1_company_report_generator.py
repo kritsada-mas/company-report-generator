@@ -3,8 +3,14 @@ import components.authenticate as authenticate
 import components.workflow as workflow
 from components.constants import IGNORE_AUTHORIZATION_GROUP, REMOVE_AUTHENTICATION
 from components.api_handler import upload_workflow, create_new_report, get_existing_report
+# Initialize workflow_name globally
 workflow_name = "default"
 
+def initialize_workflow_name():
+    global workflow_name
+    workflow_name = "default"  # Or any other default value you want
+
+initialize_workflow_name()
 
 # Page configuration
 st.set_page_config(page_title="Company Report Generator", page_icon="📈")
