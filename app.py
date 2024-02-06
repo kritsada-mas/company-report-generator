@@ -24,7 +24,7 @@ def switch_page(page_name: str):
 
     page_names = [standardize_name(config["page_name"]) for config in pages.values()]
 
-    raise ValueError(f"Could not find page {page_name}. Must be one of {page_names}")```
+    raise ValueError(f"Could not find page {page_name}. Must be one of {page_names}")
 
 st.set_page_config(
     page_title="Home",
