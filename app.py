@@ -26,4 +26,5 @@ else:
 # Additional content on the home page
 st.write("Explore the latest advancements in AI/ML and unlock the potential of Fluxus technologies.")
 
-st.page_link("pages/1_company_report_generator.py", label="Company Report Generator", use_container_width=True)
+with st.container(height=300):
+    st.page_link("pages/1_company_report_generator.py", label="Company Report Generator", use_container_width=True)
