@@ -68,14 +68,13 @@ def get_existing_report(form_obj, report_id):
                 f"{GET_PROGRESS_ENDPOINT}{report_id}", headers=headers
             )
             response_json = response.json()
-            message = response_json["message"]
-            form_obj.info(response_json)
+            # message = response_json["message"]
             # check for errors
-            if "generating" in message:
+            if response_json["transactionStatus"] == "Inprogress":
                 form_obj.info(
                     "Our AI agent is still in the process of generating your report. Please be patient, and retry in one minute."
                 )
-            elif "failed" in message:
+            elif response_json["transactionStatus"] in "Fail":
                 form_obj.error(
                     "The company report failed to generate. Please try re-creating the report using the form above. If this error persists, please contact 'info@fluxus.io'."
                 )
