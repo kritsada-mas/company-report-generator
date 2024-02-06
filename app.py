@@ -4,7 +4,7 @@ from components.constants import REMOVE_AUTHENTICATION
 
 st.set_page_config(
     page_title="Home",
-    page_icon="👋",
+    page_icon="images/logo.jpg",
 )
 
 st.write("# Welcome to Fluxus AI/ML! 👋")
