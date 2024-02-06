@@ -31,4 +31,4 @@ row2 = st.columns(3)
 
 for col in row1 + row2:
     tile = col.container(height=120)
-    tile.page_link("pages/1_company_report_generator.py", label="Company\nReport\nGenerator", use_container_width=True)
+    tile.page_link("pages/1_company_report_generator.py", label="Company\n\nReport\n\nGenerator", use_container_width=True)
