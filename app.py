@@ -26,5 +26,9 @@ else:
 # Additional content on the home page
 st.write("Explore the latest advancements in AI/ML and unlock the potential of Fluxus technologies.")
 
-with st.container(height=300):
-    st.page_link("pages/1_company_report_generator.py", label="Company Report Generator", use_container_width=True)
+row1 = st.columns(3)
+row2 = st.columns(3)
+
+for col in row1 + row2:
+    tile = col.container(height=120)
+    tile.page_link("pages/1_company_report_generator.py", label="Company Report Generator", use_container_width=True)
