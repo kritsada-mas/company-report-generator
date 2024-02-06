@@ -1,3 +1,4 @@
 streamlit
 streamlit-modal
+streamlit-extras
 requests

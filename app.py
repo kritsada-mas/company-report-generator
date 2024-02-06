@@ -1,6 +1,8 @@
 import streamlit as st
 import components.authenticate as authenticate
 from components.constants import REMOVE_AUTHENTICATION
+from streamlit_extras.switch_page_button import switch_page
+
 
 st.set_page_config(
     page_title="Home",
@@ -25,3 +27,6 @@ else:
 
 # Additional content on the home page
 st.write("Explore the latest advancements in AI/ML and unlock the potential of Fluxus technologies.")
+
+if st.button("Company Report Generator"):
+    switch_page("Company Report Generator")
