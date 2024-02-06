@@ -62,8 +62,11 @@ if (
     create_report_form = st.form(key = 'create_report')
     input_url = create_report_form.text_input(label = 'Company Webpage URL', placeholder = '', value = '', disabled = False, help = 'This can be any webpage that provides basic information about the company (e.g. https://fluxus.io).')
     create_report_submitted = create_report_form.form_submit_button(label = 'Create a New Report', disabled = False)
-    if create_report_submitted: 
-        with st.spinner('creating report...'): create_new_report(st.session_state['workflow_name'], create_report_form, input_url)
+    if create_report_submitted:
+        if st.session_state['workflow_name']:
+            with st.spinner('creating report...'): create_new_report(st.session_state['workflow_name'], create_report_form, input_url)
+        else:
+            with st.spinner('creating report...'): create_new_report(None, create_report_form, input_url)
         
     # form to query an existing report
     get_report_form = st.form(key = 'get_report')
