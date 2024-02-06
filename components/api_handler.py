@@ -69,7 +69,7 @@ def get_existing_report(form_obj, report_id):
             )
             response_json = response.json()
             message = response_json["message"]
-            # form_obj.info(response_json)
+            form_obj.info(response_json)
             # check for errors
             if "generating" in message:
                 form_obj.info(
