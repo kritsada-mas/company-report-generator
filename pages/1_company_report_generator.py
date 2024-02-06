@@ -20,10 +20,10 @@ else:
 
     # Add login/logout buttons
     if authorized:
-        st.write("Hi")
+        st.write("Harness the power of generative AI to create insightful company reports")
         authenticate.button_logout()
     else:
-        st.write("Please login?")
+        st.write("Unlock the full experience by logging in.")
         authenticate.button_login()
 
 if (
@@ -31,7 +31,7 @@ if (
     # and 
     # (("demo" in st.session_state["user_cognito_groups"]) or IGNORE_AUTHORIZATION_GROUP)
     ):
-    st.write("Harness the power of generative AI to create insightful company reports")
+    
     
     
     with st.sidebar:
