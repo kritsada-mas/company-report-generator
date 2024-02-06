@@ -76,8 +76,8 @@ if (
         with st.spinner('retrieving report...'): get_existing_report(get_report_form, report_id) 
     
 
-else:
-    if authorized:
-        st.write("You do not have access. Please contact the administrator.")
-    else:
-        st.write("Please login!")
+# else:
+#     if authorized:
+#         st.write("You do not have access. Please contact the administrator.")
+#     else:
+#         st.write("Please login!")
