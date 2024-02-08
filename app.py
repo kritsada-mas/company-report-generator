@@ -7,7 +7,7 @@ st.set_page_config(
     page_icon="images/logo.jpg",
 )
 
-st.write("# Welcome to Fluxus AI/ML! 👋")
+st.write("# Welcome to Fluxus AI/ML!")
 
 if REMOVE_AUTHENTICATION:
     st.write("Hello there! Explore Fluxus AI/ML.")
