@@ -24,11 +24,13 @@ else:
         authenticate.button_login()
 
 if st.session_state["authenticated"]:
+    print("123123123123123123123")
     # Additional content on the home page
     st.write("Explore the latest advancements in AI/ML and unlock the potential of Fluxus technologies.")
 
     blank_row = st.columns(3)
     row1 = st.columns(3)
+    
 
     for col in blank_row:
         col.container(height=60,border=False)
