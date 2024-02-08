@@ -27,8 +27,11 @@ else:
 st.write("Explore the latest advancements in AI/ML and unlock the potential of Fluxus technologies.")
 
 row1 = st.columns(3)
-row2 = st.columns(3)
+r2c1, r2c2, r2c3 = st.columns(3)
 
-for col in row1 + row2:
+for col in row1:
     tile = col.container(height=120)
-    tile.page_link("pages/1_company_report_generator.py", label=" ", icon="images/logo.jpg", use_container_width=True)
+    
+with r2c1:
+    tile = r2c1.container(height=120)
+    tile.page_link("pages/1_company_report_generator.py", label="Company\n\nReport\n\nGenerator", use_container_width=True)
