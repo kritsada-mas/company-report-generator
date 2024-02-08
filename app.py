@@ -36,9 +36,9 @@ if st.session_state["authenticated"]:
     tile1 = row1[0].container(height=90)
     tile1.page_link("pages/1_company_report_generator.py", label="Company Report\n\nGenerator", use_container_width=True)
     
-    tile2 = row1[0].container(height=90)
+    tile2 = row1[1].container(height=90)
     tile2.page_link("pages/2_server_log_generator.py", label="Server Log\n\nGenerator", use_container_width=True)
     
-    tile3 = row1[0].container(height=90)
+    tile3 = row1[2].container(height=90)
     tile3.page_link("pages/3_temp.py", label="Document PII\n\nDetector", use_container_width=True)
 
