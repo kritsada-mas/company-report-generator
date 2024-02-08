@@ -4,7 +4,9 @@ def map_workflow(saved_config):
         "workflow": [
             {
                 "index": "1",
-                "input": ["input_url"],
+                "input": [
+                    "input_url"
+                ],
                 "name": "scrape_input_url",
                 "type": "scrape",
                 "parameters": {
@@ -12,13 +14,16 @@ def map_workflow(saved_config):
                     "search_queries": "",
                     "search_per_quiry": "",
                     "crawler_mode": False,
-                    "max_scraped_token": 10000,
+                    "max_scraped_token": 10000
                 },
-                "output": "scraped_input_url",
+                "output": "scraped_input_url"
             },
             {
                 "index": "2",
-                "input": ["input_url", "scraped_input_url"],
+                "input": [
+                    "input_url",
+                    "scraped_input_url"
+                ],
                 "name": "llm_get_company_name",
                 "type": "llm",
                 "parameters": {
@@ -27,19 +32,22 @@ def map_workflow(saved_config):
                     "inference": {
                         "body": {
                             "prompt": "\n\nHuman: From the following text that has been scraped from webpage {workflow_inputs['input_url']}. What is the name of the company.\nReturn only the company name and nothing else.\n\n<web_data>{workflow_inputs['scraped_input_url']}</web_data>\n\nAssistant: The company name is\n\n",
-                            "max_tokens_to_sample": 10,
+                            "max_tokens_to_sample": 10
                         },
                         "modelId": "anthropic.claude-instant-v1",
                         "accept": "application/json",
-                        "contentType": "application/json",
+                        "contentType": "application/json"
                     },
-                    "format": "string",
+                    "format": "string"
                 },
-                "output": "company_name",
+                "output": "company_name"
             },
             {
                 "index": "3",
-                "input": ["input_url", "company_name"],
+                "input": [
+                    "input_url",
+                    "company_name"
+                ],
                 "name": "search_company_info",
                 "type": "scrape",
                 "parameters": {
@@ -47,13 +55,13 @@ def map_workflow(saved_config):
                     "search_queries": [
                         "{workflow_inputs['company_name']} About",
                         "{workflow_inputs['company_name']} Financial",
-                        "{workflow_inputs['company_name']} Service",
+                        "{workflow_inputs['company_name']} Service"
                     ],
                     "search_per_quiry": "3",
                     "crawler_mode": False,
-                    "max_scraped_token": 10000,
+                    "max_scraped_token": 10000
                 },
-                "output": "company_info",
+                "output": "company_info"
             },
             {
                 "index": "4",
@@ -61,10 +69,14 @@ def map_workflow(saved_config):
                 "branches": [
                     {
                         "branch_name": "introduction",
+                        "branch_output:": "introduction_report",
                         "branch_workflow": [
                             {
                                 "index": "4.1.1",
-                                "input": ["company_name", "company_info"],
+                                "input": [
+                                    "company_name",
+                                    "company_info"
+                                ],
                                 "name": "llm_generate_introduction",
                                 "type": "llm",
                                 "parameters": {
@@ -81,27 +93,31 @@ def map_workflow(saved_config):
                                                 "p_example": "",
                                                 "p_conversation_history": "",
                                                 "p_thought_process": "\n\nThink about your answer first before you respond. Take a deep breath. Silently go through each task step by step",
-                                                "p_formatting": '\n\nReturn data in the following json format\n"introduction":{\n"name":"",\n"type":"",\n"sector":"",\n"business_overview":"",\n"proposition":""\n}',
-                                                "p_assistant": "\n\nAssistant:{",
+                                                "p_formatting": "\n\nReturn data in the following json format\n\"introduction\":{\n\"name\":\"\",\n\"type\":\"\",\n\"sector\":\"\",\n\"business_overview\":\"\",\n\"proposition\":\"\"\n}",
+                                                "p_assistant": "\n\nAssistant:{"
                                             },
-                                            "max_tokens_to_sample": 20000,
+                                            "max_tokens_to_sample": 20000
                                         },
                                         "modelId": "anthropic.claude-instant-v1",
                                         "accept": "application/json",
-                                        "contentType": "application/json",
+                                        "contentType": "application/json"
                                     },
-                                    "format": "json",
+                                    "format": "json"
                                 },
-                                "output": "introduction_report",
+                                "output": "introduction_report"
                             }
-                        ],
+                        ]
                     },
                     {
                         "branch_name": "financial",
+                        "branch_output:": "financial_report",
                         "branch_workflow": [
                             {
                                 "index": "4.2.1",
-                                "input": ["input_url", "company_name"],
+                                "input": [
+                                    "input_url",
+                                    "company_name"
+                                ],
                                 "name": "search_financial",
                                 "type": "scrape",
                                 "parameters": {
@@ -110,17 +126,20 @@ def map_workflow(saved_config):
                                         "{workflow_inputs['company_name']} Highlight Financial Overtime",
                                         "{workflow_inputs['company_name']} New Product/Services Roadmaps",
                                         "{workflow_inputs['company_name']} Annual Report",
-                                        "{workflow_inputs['company_name']} Company Structure",
+                                        "{workflow_inputs['company_name']} Company Structure"
                                     ],
                                     "search_per_quiry": "3",
                                     "crawler_mode": False,
-                                    "max_scraped_token": 10000,
+                                    "max_scraped_token": 10000
                                 },
-                                "output": "financial_info",
+                                "output": "financial_info"
                             },
                             {
                                 "index": "4.2.2",
-                                "input": ["company_name", "financial_info"],
+                                "input": [
+                                    "company_name",
+                                    "financial_info"
+                                ],
                                 "name": "llm_generate_financial",
                                 "type": "llm",
                                 "parameters": {
@@ -137,27 +156,31 @@ def map_workflow(saved_config):
                                                 "p_example": "",
                                                 "p_conversation_history": "",
                                                 "p_thought_process": "\n\nThink about your answer first before you respond. Take a deep breath. Silently go through each task step by step",
-                                                "p_formatting": '\n\nReturn data in the following json format\n"business_health":{\n"headline_financial_overtime":"",\n"company_structure":"",\n"last_annual_report":"",\n"service_roadmaps":""\n}',
-                                                "p_assistant": "\n\nAssistant:{",
+                                                "p_formatting": "\n\nReturn data in the following json format\n\"business_health\":{\n\"headline_financial_overtime\":\"\",\n\"company_structure\":\"\",\n\"last_annual_report\":\"\",\n\"service_roadmaps\":\"\"\n}",
+                                                "p_assistant": "\n\nAssistant:{"
                                             },
-                                            "max_tokens_to_sample": 20000,
+                                            "max_tokens_to_sample": 20000
                                         },
                                         "modelId": "anthropic.claude-instant-v1",
                                         "accept": "application/json",
-                                        "contentType": "application/json",
+                                        "contentType": "application/json"
                                     },
-                                    "format": "json",
+                                    "format": "json"
                                 },
-                                "output": "financial_report",
-                            },
-                        ],
+                                "output": "financial_report"
+                            }
+                        ]
                     },
                     {
                         "branch_name": "audience",
+                        "branch_output:": "audience_report",
                         "branch_workflow": [
                             {
                                 "index": "4.3.1",
-                                "input": ["input_url", "company_name"],
+                                "input": [
+                                    "input_url",
+                                    "company_name"
+                                ],
                                 "name": "search_audience",
                                 "type": "scrape",
                                 "parameters": {
@@ -165,17 +188,20 @@ def map_workflow(saved_config):
                                     "search_queries": [
                                         "{workflow_inputs['company_name']} target demographic audience",
                                         "{workflow_inputs['company_name']} target geographic audience",
-                                        "{workflow_inputs['company_name']} target sector audience",
+                                        "{workflow_inputs['company_name']} target sector audience"
                                     ],
                                     "search_per_quiry": "3",
                                     "crawler_mode": False,
-                                    "max_scraped_token": 10000,
+                                    "max_scraped_token": 10000
                                 },
-                                "output": "audience_info",
+                                "output": "audience_info"
                             },
                             {
                                 "index": "4.3.2",
-                                "input": ["company_name", "audience_info"],
+                                "input": [
+                                    "company_name",
+                                    "audience_info"
+                                ],
                                 "name": "llm_generate_audience",
                                 "type": "llm",
                                 "parameters": {
@@ -192,24 +218,24 @@ def map_workflow(saved_config):
                                                 "p_example": "",
                                                 "p_conversation_history": "",
                                                 "p_thought_process": "\n\nThink about your answer first before you respond. Take a deep breath. Silently go through each task step by step",
-                                                "p_formatting": '\n\nReturn data in the following json format\n"audience":{\n"demogrophic":"",\n"geographic":"",\n"sector":""\n}',
-                                                "p_assistant": "\n\nAssistant:{",
+                                                "p_formatting": "\n\nReturn data in the following json format\n\"audience\":{\n\"demogrophic\":\"\",\n\"geographic\":\"\",\n\"sector\":\"\"\n}",
+                                                "p_assistant": "\n\nAssistant:{"
                                             },
-                                            "max_tokens_to_sample": 20000,
+                                            "max_tokens_to_sample": 20000
                                         },
                                         "modelId": "anthropic.claude-instant-v1",
                                         "accept": "application/json",
-                                        "contentType": "application/json",
+                                        "contentType": "application/json"
                                     },
-                                    "format": "json",
+                                    "format": "json"
                                 },
-                                "output": "audience_report",
-                            },
-                        ],
-                    },
+                                "output": "audience_report"
+                            }
+                        ]
+                    }
                 ],
-                "output": "llm_report",
-            },
+                "output": "llm_report"
+            }
         ],
     }
 
