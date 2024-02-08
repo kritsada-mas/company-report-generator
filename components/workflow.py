@@ -69,7 +69,6 @@ def map_workflow(saved_config):
                 "branches": [
                     {
                         "branch_name": "introduction",
-                        "branch_output:": "introduction_report",
                         "branch_workflow": [
                             {
                                 "index": "4.1.1",
@@ -110,7 +109,6 @@ def map_workflow(saved_config):
                     },
                     {
                         "branch_name": "financial",
-                        "branch_output:": "financial_report",
                         "branch_workflow": [
                             {
                                 "index": "4.2.1",
@@ -173,7 +171,6 @@ def map_workflow(saved_config):
                     },
                     {
                         "branch_name": "audience",
-                        "branch_output:": "audience_report",
                         "branch_workflow": [
                             {
                                 "index": "4.3.1",
