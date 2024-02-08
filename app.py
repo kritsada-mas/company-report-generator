@@ -33,4 +33,4 @@ for col in row1:
     tile = col.container(height=60,border=False)
     
 tile = r2c1.container(height=120)
-tile.page_link("pages/1_company_report_generator.py", label="Company\n\nReport\n\nGenerator", use_container_width=True)
+tile.page_link("pages/1_company_report_generator.py", label="Company Report\n\nGenerator", use_container_width=True)
