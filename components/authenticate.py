@@ -171,7 +171,7 @@ def get_user_cognito_groups(id_token):
     if id_token != "":
         header, payload, signature = id_token.split(".")
         printable_payload = base64.urlsafe_b64decode(pad_base64(payload))
-        logging.infor("printable_payload")
+        logging.info("printable_payload")
         payload_dict = json.loads(printable_payload)
         try:
             user_cognito_groups = list(dict(payload_dict)["cognito:groups"])
