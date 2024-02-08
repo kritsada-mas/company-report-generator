@@ -23,14 +23,15 @@ else:
         st.write("Unlock the full experience by logging in.")
         authenticate.button_login()
 
-# Additional content on the home page
-st.write("Explore the latest advancements in AI/ML and unlock the potential of Fluxus technologies.")
+if st.session_state["authenticated"]:
+    # Additional content on the home page
+    st.write("Explore the latest advancements in AI/ML and unlock the potential of Fluxus technologies.")
 
-row1 = st.columns(3)
-r2c1, r2c2, r2c3 = st.columns(3)
+    row1 = st.columns(3)
+    r2c1, r2c2, r2c3 = st.columns(3)
 
-for col in row1:
-    tile = col.container(height=60,border=False)
-    
-tile = r2c1.container(height=90)
-tile.page_link("pages/1_company_report_generator.py", label="Company Report\n\nGenerator", use_container_width=True)
+    for col in row1:
+        tile = col.container(height=60,border=False)
+        
+    tile = r2c1.container(height=90)
+    tile.page_link("pages/1_company_report_generator.py", label="Company Report\n\nGenerator", use_container_width=True)
