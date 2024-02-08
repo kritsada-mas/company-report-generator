@@ -32,5 +32,5 @@ r2c1, r2c2, r2c3 = st.columns(3)
 for col in row1:
     tile = col.container(height=60,border=False)
     
-tile = r2c1.container(height=100)
+tile = r2c1.container(height=90)
 tile.page_link("pages/1_company_report_generator.py", label="Company Report\n\nGenerator", use_container_width=True)
