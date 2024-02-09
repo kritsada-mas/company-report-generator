@@ -48,6 +48,7 @@ def create_new_report(workflow_name, form_obj, company_webpage_url):
             form_obj.info(
                 "Our AI agent is in the process of generating your report, this could take up to 3 minutes to complete. Please fill the form below using the following report ID to get the result:"
             )
+            form_obj.info(f"workflow name = {workflow_name}")
             form_obj.code(response_json["transactionID"])
         except Exception as e:
             logging.error(str(e))
