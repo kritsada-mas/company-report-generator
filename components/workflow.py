@@ -258,7 +258,7 @@ def map_workflow(saved_config):
             parallel_step["branches"] = [
                 branch
                 for branch in parallel_step["branches"]
-                if branch["branch_name"] != "business_health"
+                if branch["branch_name"] != "financial"
             ]
         if not saved_config["Audiences"]:
             parallel_step["branches"] = [
