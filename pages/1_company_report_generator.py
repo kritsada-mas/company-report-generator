@@ -3,7 +3,7 @@ import components.authenticate as authenticate
 import components.workflow as workflow
 from components.constants import IGNORE_AUTHORIZATION_GROUP, REMOVE_AUTHENTICATION
 from components.api_handler import upload_workflow, create_new_report, get_existing_report
-import boto3
+# import boto3
 
 
 # Page configuration
