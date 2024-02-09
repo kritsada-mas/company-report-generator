@@ -234,7 +234,7 @@ def map_workflow(saved_config):
                         "branch_name": "competitors",
                         "branch_workflow": [
                             {
-                                "index": "4.3.1",
+                                "index": "4.4.1",
                                 "input": [
                                     "company_name",
                                     "company_info"
@@ -269,7 +269,7 @@ def map_workflow(saved_config):
                                 "output": "company_summary"
                             },
                             {
-                                "index": "4.3.2",
+                                "index": "4.4.2",
                                 "input": [
                                     "company_summary",
                                 ],
@@ -303,7 +303,7 @@ def map_workflow(saved_config):
                                 "output": "company_client_POV"
                             },
                             {
-                                "index": "4.3.3",
+                                "index": "4.4.3",
                                 "input": [
                                     "company_client_POV",
                                 ],
