@@ -264,7 +264,7 @@ def map_workflow(saved_config):
                                         "accept": "application/json",
                                         "contentType": "application/json"
                                     },
-                                    "format": "text"
+                                    "format": "string"
                                 },
                                 "output": "company_summary"
                             },
@@ -298,7 +298,7 @@ def map_workflow(saved_config):
                                         "accept": "application/json",
                                         "contentType": "application/json"
                                     },
-                                    "format": "text"
+                                    "format": "string"
                                 },
                                 "output": "company_client_POV"
                             },
