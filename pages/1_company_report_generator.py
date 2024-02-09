@@ -55,7 +55,7 @@ if (
                     workflow_body, st.session_state['workflow_name'] = workflow.map_workflow(saved_config)
                     with st.spinner('Uploading workflow...'): upload_workflow(workflow_body)
             with t2:
-                st.write("Report Template is currently in development")
+                st.error("Report Template is currently in development")
                 st.file_uploader("Report Template")
         with st.expander("History"):
             st.write("History is currently in development")
