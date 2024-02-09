@@ -229,6 +229,80 @@ def map_workflow(saved_config):
                                 "output": "audience_report"
                             }
                         ]
+                    },
+                    {
+                        "branch_name": "competitors",
+                        "branch_workflow": [
+                            {
+                                "index": "4.3.1",
+                                "input": [
+                                    "company_name",
+                                    "company_info"
+                                ],
+                                "name": "llm_company_summary",
+                                "type": "llm",
+                                "parameters": {
+                                    "model_type": "bedrock",
+                                    "prompt_type": "claude multi-prompt",
+                                    "inference": {
+                                        "body": {
+                                            "prompt": {
+                                                "p_human": "\n\nHuman: ",
+                                                "p_task_context": "\n\nYou are the helpful and expert researcher for the board of directors. You are judged on the accuracy of your work and the insighful analysis behind it. Your goal is to analyse the given documents and write single paragraph that defines their business sufficiently so that I can perform a competitive review.",
+                                                "p_tone_context": "",
+                                                "p_data": "\n\nI'm going to give you some documents of web scraping data for a company called {workflow_inputs['company_name']}. Read the documents carefully, because I'm going to ask you a question about it. Here are the documents: <document>{workflow_inputs['company_info']}</document>",
+                                                "p_task_description": "\n\nWrite a single paragraph that defines {workflow_inputs['company_name']} company business sufficiently so that I can perform a competitive review.\nDo not reference the name of the company directly.\nThe paragraph should include things like provide services or products, sector, target audience, scale of client (S,M,L,XL),  and whatever else is required to be able to compare like with like.\nDo not reference the name of the company directly.\nDo not reference the name of the company directly.",
+                                                "p_example": "",
+                                                "p_conversation_history": "",
+                                                "p_thought_process": "\n\nThink about your answer first before you respond. Take a deep breath. Silently go through each task step by step",
+                                                "p_formatting": "",
+                                                "p_assistant": "\n\nAssistant:"
+                                            },
+                                            "max_tokens_to_sample": 20000
+                                        },
+                                        "modelId": "anthropic.claude-instant-v1",
+                                        "accept": "application/json",
+                                        "contentType": "application/json"
+                                    },
+                                    "format": "text"
+                                },
+                                "output": "company_summary"
+                            },
+                            {
+                                "index": "4.3.2",
+                                "input": [
+                                    "company_summary",
+                                ],
+                                "name": "llm_company_client_POV",
+                                "type": "llm",
+                                "parameters": {
+                                    "model_type": "bedrock",
+                                    "prompt_type": "claude multi-prompt",
+                                    "inference": {
+                                        "body": {
+                                            "prompt": {
+                                                "p_human": "\n\nHuman: ",
+                                                "p_task_context": "\n\nYou are the helpful and expert researcher for the board of directors. You are judged on the accuracy of your work and the insighful analysis behind it. Your goal is to analyse the given documents and give insight from the perspective of potential clients",
+                                                "p_tone_context": "",
+                                                "p_data": "\n\nI'm going to give you some documents of company summary. Read the documents carefully, because I'm going to ask you a question about it. Here are the documents: <document>{workflow_inputs['company_summary']}</document>",
+                                                "p_task_description": "\n\nFrom a POV of potential clients of the above company, write a brief that would lead you to them, what kind of products or services you were looking for, what challenge were you facing that leads you to approach the company.\nLimit the brief to key bullet points.\nDo not reference the name of the company directly.",
+                                                "p_example": "\n\nHere is an example of how to write the brief:\n<example>Q: User given some documents about draft beer company.\nA:\n- Looking for an established brewery with a strong background in craft beer and a reputation for quality IPAs and seasonal offerings.\n- Desire a supplier that can handle large-scale orders while still offering a variety of unique and distinctive beer flavors.\n- Interested in a brewery that retains a creative and artisanal approach to beer-making despite significant operational growth.\n- Require a partner with a potentially expanded beverage portfolio for diverse market needs, thanks to recent ownership changes.\n- Value a brewer that can provide a craft brew experience that appeals to a discerning beer enthusiast customer base.\n- Seek a dependable and scalable beer supply source with an artistic heritage and recognition in the market.\n- Prefer working with a brewery that has benefitted from investment in facilities to accommodate increased production demands.\n- As a potential client, anticipate a balance of tradition and innovation in brewing techniques and flavor profiles.\n- Looking to develop a relationship with a brewery that has transitioned smoothly from local to major player in the industry and is backed by a strong multinational corporation.</example>",
+                                                "p_conversation_history": "",
+                                                "p_thought_process": "\n\nThink about your answer first before you respond. Take a deep breath. Silently go through each task step by step",
+                                                "p_formatting": "",
+                                                "p_assistant": "\n\nAssistant:"
+                                            },
+                                            "max_tokens_to_sample": 20000
+                                        },
+                                        "modelId": "anthropic.claude-instant-v1",
+                                        "accept": "application/json",
+                                        "contentType": "application/json"
+                                    },
+                                    "format": "text"
+                                },
+                                "output": "company_client_POV"
+                            }
+                        ]
                     }
                 ],
                 "output": "llm_report"
