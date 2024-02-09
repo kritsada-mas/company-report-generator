@@ -301,6 +301,29 @@ def map_workflow(saved_config):
                                     "format": "text"
                                 },
                                 "output": "company_client_POV"
+                            },
+                            {
+                                "index": "4.3.3",
+                                "input": [
+                                    "company_client_POV",
+                                ],
+                                "name": "llm_competitors_search_queries",
+                                "type": "llm",
+                                "parameters": {
+                                    "model_type": "bedrock",
+                                    "prompt_type": "single-prompt",
+                                    "inference": {
+                                        "body": {
+                                            "prompt": "Human: I will provide a company brief.\nGenerate 3 google search queries that could be use to find 10 competitors company that would fit the company brief.\nFor example top 10 ... in ...\n\nThese are the company brief\n\n<brief>workflow_inputs['company_client_POV']}</brief>\n\nReturn data in the following json format\n\"search_query\":[\n\"\",\n\"\",\n\"\",\n]\n\nAssistant:{",
+                                            "max_tokens_to_sample": 20000
+                                        },
+                                        "modelId": "anthropic.claude-instant-v1",
+                                        "accept": "application/json",
+                                        "contentType": "application/json"
+                                    },
+                                    "format": "json"
+                                },
+                                "output": "competitors_search_queries"
                             }
                         ]
                     }
