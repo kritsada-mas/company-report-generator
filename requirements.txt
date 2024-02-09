@@ -2,3 +2,4 @@ streamlit
 streamlit-modal
 streamlit-extras
 requests
+boto3
